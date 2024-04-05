@@ -7,7 +7,7 @@ home = Blueprint('home', __name__)
 def index():
     print('rota inicial (/)')
     if 'username' in session:
-        pedido = Pedido("Pedido de teste maior que o anterios", 100.5)
+        pedido = Pedido("Pedido de teste maior que o anterios", "Nagé", "01/01/2023")
         pedido.inserir()
         return render_template('home/index.html')
     
