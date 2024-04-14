@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>
+    <title>Document</title>    
 </head>
 <body>
     <h1>Home</h1>
     {% if session.username %}
-    <h2>Usuário logado: [ {{session.username}} ]</h2>
+        <h2>Usuário logado: [ {{session.username}} ]</h2>
+        <h3>Testando site</h3>
+        <h4>Minha segunda sessão é: {{session.senha}}</h4>
+    {% else %}
+        <h4>Não esta logado</h4>    
     {% endif %}
-    <h3>Testando site</h3>
-    <h4>Minha segunda sessão é: {{session.senha}}</h4>
     <a href="/auth/logout">Sair</a>
 </body>
 </html>

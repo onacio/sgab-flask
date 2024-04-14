@@ -1,17 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./../css/style.css">
 </head>
 <body>
-    <h1>Login</h1>
+    <form class="form" action="/auth/login" method="post">
+        <div class="card">
+            <div class="card-top">
+                <img class="imglogin" src="./../public/img/user_128.png" alt="">
+                <h2>Acesso ao Sistema</h2>
+                <p>Seja bem-vindo</p>
+            </div> 
+            
+            <div class="card-group">
+                <label for="">Email</label>
+                <input type="email" name="email" placeholder="Digite seu e-mail" require>
+            </div>   
+            
+            <div class="card-group">
+                <label for="">Senha</label>
+                <input type="password" name="senha" placeholder="Digite sua senha" require>
+            </div> 
+            
+            <div class="card-group">
+                <label><input type="checkbox">Lembre-me</label>                
+            </div>    
+            
+            <div class="card-group btn">
+                <button type="submit">ACESSAR</button>
+            </div>
+        </div>
 
-    <form action="/auth/login" method="post">
-        <input type="text" name="usuario">
-        <input type="text" name="senha">
-        <button type="submit">Entrar</button>
+        <!-- <label for="">Usuário</label><br>
+        <input type="text" name="usuario"><br><br>
+        <label for="">Senha</label><br>
+        <input type="password" name="senha"><br><br>
+        <button type="submit">Entrar</button> -->
     </form>
 </body>
 </html>
