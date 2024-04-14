@@ -1,8 +1,8 @@
 from flask import Flask
-from views.auth import auth
-from views.home import home
+from src.views.auth import auth
+from src.views.home import home
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='src/templates')
 app.secret_key = "fhfhfhfhfereyew"
 
 app.register_blueprint(auth)
