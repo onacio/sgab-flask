@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>    
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
     <h1>Home</h1>
     {% if session.username %}
         <h2>Usuário logado: [ {{session.username}} ]</h2>
@@ -15,5 +11,5 @@
         <h4>Não esta logado</h4>    
     {% endif %}
     <a href="{{url_for('auth.logout')}}">Sair</a>
-</body>
-</html>
+
+{% endblock %}
