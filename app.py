@@ -8,4 +8,7 @@ app.secret_key = "fhfhfhfhfereyew"
 app.register_blueprint(auth)
 app.register_blueprint(home)
 
-app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
+
+#set FLASK_ENV=development

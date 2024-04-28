@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 
+{% block titulo %}SGAB - Página Home{% endblock %}
+
 {% block conteudo %}
 
     <h1>Home</h1>
     {% if session.username %}
-        <h2>Usuário logado: [ {{session.username}} ]</h2>
-        <h3>Testando site</h3>
-        <h4>Minha segunda sessão é: {{session.senha}}</h4>
+        <h2>Usuário logado: [ {{session.username}} ]</h2>        
+        <h4>Minha senha é: {{session.senha}}</h4>
     {% else %}
         <h4>Não esta logado</h4>    
     {% endif %}
-    <a href="{{url_for('auth.logout')}}">Sair</a>
+    
 
 {% endblock %}
