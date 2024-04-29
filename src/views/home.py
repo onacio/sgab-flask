@@ -9,3 +9,10 @@ def index():
         return render_template('home/index.html')
     
     return redirect(url_for('auth.login'))
+
+@home.route('/sobre')
+def sobre():    
+    if 'username' in session:        
+        return render_template('home/sobre.html')
+    
+    return redirect(url_for('auth.login'))
