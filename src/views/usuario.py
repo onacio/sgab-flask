@@ -1,7 +1,7 @@
 from flask import Blueprint, request, session, render_template, redirect, url_for
 from src.models.Usuario import Usuario
 
-usuario = Blueprint('usuario', __name__)
+usuario = Blueprint('usuario', __name__, url_prefix='/usuario')
 
 @usuario.route('/inserir', methods=['GET', 'POST'])
 def inserir():    

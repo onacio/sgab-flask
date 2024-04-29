@@ -4,34 +4,38 @@
 
 {% block conteudo %}
 
-    <h1>Inserir usuários</h1>
-    <form action="{{url_for('usuario.inserir')}}" method="post">
-        <label for="nome">Nome</label><br>
-        <input type="text" name="nome" id=""><br>
-        
-        <label for="sobrenome">Sobrenome</label><br>
-        <input type="text" name="sobrenome" id=""><br>
-        
-        <label for="usuario">Nome de usuário</label><br>
-        <input type="text" name="usuario" id=""><br>
-        
-        <label for="senha">Senha</label><br>
-        <input type="text" name="senha" id=""><br>
-        
-        <label for="email">E-mail</label><br>
-        <input type="text" name="email" id=""><br>
-        
-        <label for="funcao">Função</label><br>
-        <input type="text" name="funcao" id=""><br>
-        
-        <label for="setor">Setor</label><br>
-        <input type="text" name="setor" id=""><br>
-        
-        <label for="status">Status</label><br>
-        <input type="checkbox" name="status" id="">Ativo<br>
-        
-        <button type="submit">Gravar</button>
-    </form>
+<div class="d-flex justify-content-center">
+    <div class="card w-75 p-3 d-flex justify-content-center">
+        <h1>Inserir usuários</h1>
+        <form action="{{url_for('usuario.inserir')}}" method="post">
+            <label for="nome">Nome</label><br>
+            <input class="form-control" type="text" name="nome" id=""><br>
+            
+            <label for="sobrenome">Sobrenome</label><br>
+            <input class="form-control" type="text" name="sobrenome" id=""><br>
+            
+            <label for="usuario">Nome de usuário</label><br>
+            <input class="form-control" type="text" name="usuario" id=""><br>
+            
+            <label for="senha">Senha</label><br>
+            <input class="form-control" type="text" name="senha" id=""><br>
+            
+            <label for="email">E-mail</label><br>
+            <input class="form-control" type="text" name="email" id=""><br>
+            
+            <label for="funcao">Função</label><br>
+            <input class="form-control" type="text" name="funcao" id=""><br>
+            
+            <label for="setor">Setor</label><br>
+            <input class="form-control" type="text" name="setor" id=""><br>
+            
+            <label for="status">Status</label><br>
+            <input class="form-control" type="checkbox" name="status" id="">Ativo<br>
+            
+            <button class="btn btn-primary" type="submit">Gravar</button>
+        </form>
+    </div>
+</div>
     
 
 {% endblock %}
