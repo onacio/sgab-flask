@@ -1,4 +1,4 @@
-from src.services.conexao import Conexao
+from sgab.ext.db.conexao import Conexao
 
 class Usuario:
     def __init__(self, nome, sobrenome, usuario, senha, email, funcao, setor, status):
@@ -12,19 +12,14 @@ class Usuario:
         self.status = status
 
         self.criar_tabela()
+
     def listar(self):
         pass
 
     def inserir(self):
         sql = '''
-            INSERT INTO usuarios 
-            (
-                nome, sobrenome, usuario, senha, email, funcao, setor, status
-            ) 
-            VALUES 
-            (
-                ?,?,?,?,?,?,?,?
-            );
+            INSERT INTO usuarios (nome, sobrenome, usuario, senha, email, funcao, setor, status) 
+            VALUES (?,?,?,?,?,?,?,?);
         '''
         con = Conexao().conectar()
         cur = con.cursor()

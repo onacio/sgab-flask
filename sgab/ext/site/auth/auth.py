@@ -1,5 +1,5 @@
 from flask import Blueprint, request, session, redirect, url_for, render_template, flash
-from extensions.auth import verificar_login
+from sgab.ext.db.conexao import Conexao
 
 auth = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -9,14 +9,17 @@ def login():
         usuario = request.form['email']
         senha = request.form['senha']
 
-        dados = verificar_login(usuario, senha)
+        con = Conexao().conectar()
+        cur = con.cursor()
+        cur.execute('SELECT * FROM usuarios WHERE email = ? AND senha = ?', (usuario, senha))
+        dados = cur.fetchone()
 
-        if dados != False:
+        if dados:
             session['nome'] = dados[1]
             session['usuario'] = dados[3]
             session['email'] = dados[5]
             session['cargo'] = dados[6]
-            session['status'] = dados[8]       
+            session['status'] = dados[8]
         else:
             flash('Usuário ou senha inválida!!!')
                 
