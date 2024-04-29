@@ -13,7 +13,7 @@ app.register_blueprint(usuario)
 if __name__ == '__main__':
     app.run(debug=True)
 
-#set FLASK_ENV=development
+# comando do git
 #git stash
 #git pull
 #git stash pop
