@@ -5,7 +5,7 @@ usuario = Blueprint('usuario', __name__, url_prefix='/usuario')
 
 @usuario.route('/inserir', methods=['GET', 'POST'])
 def inserir():    
-    if not 'username' in session:
+    if not 'usuario' in session:
         return redirect(url_for('auth.login'))        
     
     if request.method == 'POST':

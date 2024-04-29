@@ -4,13 +4,26 @@
 
 {% block conteudo %}
 
-    <h1>Home</h1>
-    {% if session.username %}
-        <h2>Usuário logado: [ {{session.username}} ]</h2>        
-        <h4>Minha senha é: {{session.senha}}</h4>
+    <h1>Home</h1><br>
+    <br>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-danger" role="alert">
+              {% for message in messages %}  
+                {{message}}
+              {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <!-- {% if session.usuario %}
+        <h2>Nome: [ {{session.nome}} ]</h2>        
+        <h2>Usuário: {{session.usuario}}</h2>
+        <h2>E-mail: {{session.email}}</h2>
+        <h2>Cargo: {{session.cargo}}</h2>
+        <h2>Status: {{session.status}}</h2>
     {% else %}
         <h4>Não esta logado</h4>    
-    {% endif %}
+    {% endif %} -->
     
 
 {% endblock %}
