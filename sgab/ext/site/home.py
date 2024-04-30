@@ -4,8 +4,11 @@ from flask import Blueprint, session, render_template, redirect, url_for
 home = Blueprint('home', __name__)
 
 @home.route('/')
-def index():        
+def index():      
     if 'usuario' in session:
+        if session['cargo'] == 'Administrador':
+            return redirect(url_for('admin.index'))
+
         return render_template('home/index.html')
     
     return redirect(url_for('auth.login'))

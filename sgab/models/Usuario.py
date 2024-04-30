@@ -1,4 +1,4 @@
-from sgab.ext.db.conexao import Conexao
+from sgab.db.conexao import Conexao
 
 class Usuario:
     def __init__(self, nome, sobrenome, usuario, senha, email, funcao, setor, status):

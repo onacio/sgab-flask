@@ -1,0 +1,62 @@
+{% extends 'base_admin.html' %}
+
+{% block titulo %}SGAB - Inserir usuário{% endblock %}
+
+{% block conteudo %}
+
+<div class="d-flex justify-content-center">
+    <div class="card w-75 p-3 d-flex justify-content-center">
+        <h1>Inserir usuários</h1>
+        <form action="{{url_for('admin.admin_usuarios.inserir')}}" method="post">
+                       
+            <label for="nome">Nome</label><br>
+            <div class="input-group input-group-sm mb-3">
+                <input type="text" name="nome" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+
+            <label for="nome">Sobrenome</label><br>
+            <div class="input-group input-group-sm mb-3">
+                <input type="text" name="sobrenome" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+
+            <label for="nome">Nome de usuário</label><br>
+            <div class="input-group input-group-sm mb-3">
+                <input type="text" name="usuario" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+
+            <label for="nome">Senha</label><br>
+            <div class="input-group input-group-sm mb-3">
+                <input type="text" name="senha" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+            
+            <label for="nome">E-mail</label><br>
+            <div class="input-group input-group-sm mb-3">
+                <input type="text" name="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+
+            <label for="funcao">Função</label><br>
+            <select class="form-select form-select-sm" aria-label="Default select example" name="funcao">
+                <option selected>--</option>
+                <option value="Administrador">Administrador</option>
+                <option value="Usuário">Usuário</option>                
+            </select>
+            
+            <label for="nome">Setor</label><br>
+            <div class="input-group input-group-sm mb-3">
+                <input type="text" name="setor" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+            
+            <label for="status">Status</label><br>            
+            <select class="form-select form-select-sm" aria-label="Default select example" name="status">
+                <option selected>--</option>
+                <option value="0">Inativo</option>                
+                <option value="1">Ativo</option>
+            </select>
+            <br>
+            <button class="btn btn-primary" type="submit">Gravar dados no banco</button>
+        </form>
+    </div>
+</div>
+    
+
+{% endblock %}
