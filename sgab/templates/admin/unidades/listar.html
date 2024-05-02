@@ -1,0 +1,91 @@
+{% extends 'base_admin.html' %}
+
+{% block titulo %}SGAB - Pedidos{% endblock %}
+
+{% block conteudo %}
+  <div class="container">
+    
+    <div>
+      <h1><p class="text-center">Formulário de cadastro de unidaes de saúde</p></h1>
+    </div>
+    
+    
+    <div>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        NOVO
+      </button>
+    </div>     
+
+    
+
+    <table class="table table-hover">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">NOME DA UNIDADE</th>
+          <th scope="col">CNES</th>            
+          <th scope="col">INE</th>                                 
+        </tr>
+      </thead>
+      <tbody>
+        
+        {% for dado in dados: %}
+          
+            <tr>            
+              <td>{{ dado[0] }}</td>
+              <td>{{ dado[1] }}</td>
+              <td>{{ dado[2] }}</td>
+              <td>{{ dado[3] }}</td>          
+            </tr>
+
+        {% endfor %}                
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    
+    <div class="modal-dialog">
+      
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar unidade</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+
+          <form action="{{url_for('admin.admin_unidades.inserir')}}" method="post">
+            
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Nome:</label>
+              <input type="text" name="nome" class="form-control" id="recipient-name">
+
+              <label for="recipient-name" class="col-form-label">CNES:</label>
+              <input type="number" name="cnes" class="form-control" id="recipient-name">
+
+              <label for="recipient-name" class="col-form-label">INE:</label>
+              <input type="number" name="ine" class="form-control" id="recipient-name">
+            </div>            
+
+            <!-- <div class="mb-3">
+              <label for="message-text" class="col-form-label">Message:</label>
+              <textarea class="form-control" id="message-text"></textarea>
+            </div> -->
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+              <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+
+          </form>
+
+        </div>
+        
+      </div>
+    </div>
+  </div> 
+  
+{% endblock %}

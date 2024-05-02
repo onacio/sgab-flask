@@ -15,27 +15,29 @@ def login():
         cur.execute('SELECT * FROM usuarios WHERE usuario = ? AND senha = ?', (usuario, senha))
         dados = cur.fetchone()
 
-        if dados:
+        if dados:            
             if dados[8] == 1:
                 session['nome'] = dados[1]
                 session['usuario'] = dados[3]            
                 session['cargo'] = dados[6]         
                 session['status'] = dados[8]
 
-                if dados[6] == 'Administrador':
+                if dados[6] == 'admin':
                     return redirect(url_for('admin.index'))
             else:
-                flash('Não foi possível fazer login [erro: 10]')
-                #return redirect(url_for('home.index'))
+                flash('Não foi possível fazer login [erro: 10]')                
                         
         else:
             flash('Usuário ou senha inválida!!!')
 
-        return redirect(url_for('home.index'))
+        return redirect(url_for('coab.index'))
     
     return render_template('auth/login.html')
 
 @auth.route('/logout')
 def logout():        
+    session.pop('nome', None)
     session.pop('usuario', None)
-    return redirect(url_for('home.index'))
+    session.pop('cargo', None)
+    session.pop('status', None)
+    return redirect(url_for('auth.login'))

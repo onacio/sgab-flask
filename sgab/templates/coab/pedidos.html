@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block titulo %}SGAB - Pedidos{% endblock %}
+
+{% block conteudo %}
+  <div class="container">
+    
+    <div>
+      <h1><p class="text-center">Formulário de pedidos</p></h1>
+    </div>
+    
+    <form class="card" action="{{url_for('coab.coab_pedidos.pedidos')}}" method="post">
+      <div>
+        <button class="btn btn-primary" type="submit">NOVO</button>
+      </div>
+    </form>      
+
+    <table class="table table-hover">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">Usuário</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Cargo</th>            
+        </tr>
+      </thead>
+      <tbody>
+        <tr>            
+          <td>{{session.usuario}}</td>
+          <td>{{session.nome}}</td>
+          <td>{{session.cargo}}</td>
+        </tr>                     
+      </tbody>
+    </table>
+  </div>
+  
+    <!-- <h1><p class="text-center">Quem está acessando o sistema</p></h1>
+    <br><br>
+
+    <table class="table table-hover">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">Usuário</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Cargo</th>            
+        </tr>
+      </thead>
+      <tbody>
+        <tr>            
+          <td>{{session.usuario}}</td>
+          <td>{{session.nome}}</td>
+          <td>{{session.cargo}}</td>
+        </tr>                     
+      </tbody>
+    </table> -->
+
+{% endblock %}
