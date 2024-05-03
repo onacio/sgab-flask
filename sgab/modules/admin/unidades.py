@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request
-from sgab.util.auth import is_admin, is_user_valid
+from sgab.util.auth import is_admin, is_user_valid, validar_acesso
 from sgab.models.unidade import Unidade
 
 
@@ -24,6 +24,7 @@ def inserir():
     return redirect(url_for('auth.logout'))    
 
 @admin_unidades.route('/listar')
+@validar_acesso('admin')
 def listar():
     dados = Unidade.listar_todos()    
     

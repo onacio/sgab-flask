@@ -43,3 +43,16 @@ def is_user():
 def get_current_user():
     if is_authenticated():
         return session['usuario']
+
+
+# Criando o decorator
+def validar_acesso(func):
+    def wrapper(args):
+        # Aqui você pode adicionar qualquer lógica que deseja executar
+        # antes de chamar a função de rota
+        print("Executando o decorator antes da função de rota.")
+        # Chama a função de rota original e retorna o resultado
+        return func()
+    # Mantenha o nome da função de rota original para evitar confusões com o Flask
+    wrapper.__name__ = func.__name__
+    return wrapper
