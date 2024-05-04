@@ -28,6 +28,17 @@ class Unidade:
         cur.execute(sql, (self.nome, self.cnes, self.ine))
         con.commit()
         con.close()
+
+    @staticmethod
+    def excluir(id_unidade):        
+        try:
+            con = Conexao().conectar()
+            cur = con.cursor()
+            cur.execute("DELETE FROM unidades WHERE id = ?", (id_unidade,))
+            con.commit()
+            con.close()
+        except:
+            print('erro ao excluir dado')
         
     def criar_tabela(self):
         sql_tabela_unidades = '''

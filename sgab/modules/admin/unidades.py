@@ -29,7 +29,17 @@ def listar():
     
     return render_template('admin/unidades/listar.html', dados=dados)
 
-@admin_unidades.route('/excluir')
+@admin_unidades.route('/excluir/<int:id_unidade>')
 @login_required('admin')
-def excluir():
-    return ''
+def excluir(id_unidade):
+    try:
+        Unidade.excluir(id_unidade)        
+        return redirect(session['next_url'])
+    except:
+        print('Erro ao excluir')
+        return redirect(session['next_url'])
+
+@admin_unidades.route('/editar/<int:id_unidade>')
+@login_required('admin')
+def editar(id_unidade):
+    return f'página editar de unidades {id_unidade}'
