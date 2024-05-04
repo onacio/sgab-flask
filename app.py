@@ -1,6 +1,7 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, url_for, request, session
 from sgab.modules.auth.auth import auth
 from sgab.modules.coab.coab import coab
+from sgab.util.auth import url_atual
 
 from sgab.modules.admin.admin import admin
 
@@ -13,7 +14,10 @@ app.register_blueprint(coab)
 
 @app.route('/')
 def index():
-    return redirect('/coab')
+    if 'usuario' in session:   
+        return redirect(url_for('coab.index'))
+    
+    return redirect(url_for('auth.logout'))
 
 @app.errorhandler(404)
 def not_found(error):

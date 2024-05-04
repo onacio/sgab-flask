@@ -47,7 +47,7 @@ def get_current_user():
 
 def url_atual():
     session.pop('next_url', None)
-    session['next_url'] = request.url
+    session['next_url'] = request.path
 
 
 def login_required(role):
@@ -55,8 +55,9 @@ def login_required(role):
         @wraps(f)
         def decorated_function(*args, **kwargs):            
             if 'usuario' in session and session['cargo'] == role: 
-                return f(*args, **kwargs)  
+                return f(*args, **kwargs)                  
             
             return redirect(session['next_url'])
+            
         return decorated_function
     return decorator

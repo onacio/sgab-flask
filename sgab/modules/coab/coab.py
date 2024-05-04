@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for
-from sgab.util.auth import is_user_valid, is_user, url_atual, login_required
+from sgab.util.auth import url_atual, login_required
 from sgab.modules.coab.pedidos import coab_pedidos
 
 
