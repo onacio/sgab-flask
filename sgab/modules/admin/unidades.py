@@ -1,11 +1,12 @@
-from flask import Blueprint, render_template, redirect, url_for, request
-from sgab.util.auth import is_admin, is_user_valid, login_required, login_required_sem_parametro
+from flask import Blueprint, render_template, redirect, request, session
+from sgab.util.auth import login_required, url_atual
 from sgab.models.unidade import Unidade
 
 
 admin_unidades = Blueprint('admin_unidades', __name__, url_prefix='/unidades')
 
 @admin_unidades.route('/inserir', methods=['GET', 'POST'])
+@login_required('admin')
 def inserir():
     if request.method == 'POST':
         nome = request.form['nome']
@@ -15,17 +16,20 @@ def inserir():
         unidade = Unidade(nome, cnes, ine)
         unidade.inserir()
 
-    if is_user_valid():
-        if is_admin():
-            return render_template('admin/unidades/listar.html')
+        return redirect(session['next_url'])   
         
-        return redirect(url_for('coab.index'))
-    
-    return redirect(url_for('auth.logout'))    
+    return redirect(session['next_url'])    
 
 @admin_unidades.route('/listar')
-@login_required_sem_parametro
+@login_required('admin')
 def listar():
+    url_atual()
+
     dados = Unidade.listar_todos()    
     
     return render_template('admin/unidades/listar.html', dados=dados)
+
+@admin_unidades.route('/excluir')
+@login_required('admin')
+def excluir():
+    return ''

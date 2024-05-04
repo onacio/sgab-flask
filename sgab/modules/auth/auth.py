@@ -1,11 +1,13 @@
 from flask import Blueprint, request, session, redirect, url_for, render_template, flash
 from sgab.db.conexao import Conexao
 from sgab.models.usuario import Usuario
+from sgab.util.auth import url_atual
 
 auth = Blueprint('auth', __name__, url_prefix='/auth')
 
 @auth.route('/login', methods=['GET', 'POST'])
-def login():    
+def login(): 
+    url_atual()   
     if request.method == 'POST':
         usuario = request.form['usuario']
         senha = request.form['senha']
@@ -35,7 +37,8 @@ def login():
     return render_template('auth/login.html')
 
 @auth.route('/logout')
-def logout():        
+def logout():    
+    url_atual()    
     session.pop('nome', None)
     session.pop('usuario', None)
     session.pop('cargo', None)

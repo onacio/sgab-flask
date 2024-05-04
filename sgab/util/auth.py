@@ -1,4 +1,4 @@
-from flask import session, redirect, url_for
+from flask import session, redirect, url_for, request
 from functools import wraps
 
 @staticmethod
@@ -45,47 +45,18 @@ def get_current_user():
     if is_authenticated():
         return session['usuario']
 
+def url_atual():
+    session.pop('next_url', None)
+    session['next_url'] = request.url
 
 
 def login_required(role):
     def decorator(f):
         @wraps(f)
-        def decorated_function(*args, **kwargs):
-            if not is_authenticated:
-                print('não autenticado')
-                return redirect(url_for('admin.index'))
+        def decorated_function(*args, **kwargs):            
+            if 'usuario' in session and session['cargo'] == role: 
+                return f(*args, **kwargs)  
             
-            return f(*args, **kwargs)
+            return redirect(session['next_url'])
         return decorated_function
     return decorator
-
-# sem passar parametro
-def login_required_sem_parametro(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if 'usuario' not in session:
-            print('NAO AUTENTICADO')
-            return redirect(url_for('auth.logout'))
-        return f(*args, **kwargs)
-    return decorated_function
-
-# Criando o decorator
-def validar_acesso(func):
-    def wrapper(args):
-        # Aqui você pode adicionar qualquer lógica que deseja executar
-        # antes de chamar a função de rota
-        print("Executando o decorator antes da função de rota.")
-        # Chama a função de rota original e retorna o resultado
-        return func()
-    # Mantenha o nome da função de rota original para evitar confusões com o Flask
-    wrapper.__name__ = func.__name__
-    return wrapper
-
-
-
-
-
-# from functools import wraps
-# from flask import session, request, redirect, url_for
-
-

@@ -14,8 +14,27 @@ class Usuario:
 
         self.criar_tabela()
 
-    def listar(self):
-        pass
+    @staticmethod
+    def excluir(id_usuario):        
+        try:
+            con = Conexao().conectar()
+            cur = con.cursor()
+            cur.execute("DELETE FROM usuarios WHERE id = ?", (id_usuario,))
+            con.commit()
+            con.close()
+        except:
+            print('erro ao excluir dado')
+
+    @staticmethod
+    def editar(id_usuario):        
+        try:
+            con = Conexao().conectar()
+            cur = con.cursor()
+            cur.execute("UPDATE FROM usuarios WHERE id = ?", (id_usuario,))
+            con.commit()
+            con.close()
+        except:
+            print('erro ao editar dado', )
 
     def inserir(self):
         sql = '''
