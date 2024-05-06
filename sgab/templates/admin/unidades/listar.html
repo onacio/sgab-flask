@@ -10,44 +10,46 @@
     </div>
     
     
-    <div>
+    <div class="container">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         NOVO
       </button>
-    </div>     
-
+    </div>
     
-
-    <table class="table table-hover">
-      <thead class="table-primary">
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">NOME DA UNIDADE</th>
-          <th scope="col">CNES</th>            
-          <th scope="col">INE</th>                                 
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        
-        {% for dado in dados: %}
-          
-            <tr>            
-              <td>{{ dado[0] }}</td>
-              <td>{{ dado[1] }}</td>
-              <td>{{ dado[2] }}</td>
-              <td>{{ dado[3] }}</td>          
-              <td>                                        
-                <div class="container">
-                    <a href="{{ url_for('admin.admin_unidades.editar', id_unidade=dado[0]) }}"><i class="bi bi-pencil-square"></i></a>
-                    <a href="{{ url_for('admin.admin_unidades.excluir', id_unidade=dado[0]) }}"><i class="bi bi-trash3-fill"></i></a>
-                </div>
-              </td> 
+    <div class="container">
+      <div class="table-responsive">
+        <table class="table table-hover table-sm table-bordered align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">NOME DA UNIDADE</th>
+              <th scope="col">CNES</th>            
+              <th scope="col">INE</th>                                 
+              <th scope="col"></th>
             </tr>
+          </thead>
+          <tbody>
+            
+            {% for dado in dados: %}
+              
+                <tr>            
+                  <td>{{ dado[0] }}</td>
+                  <td>{{ dado[1] }}</td>
+                  <td>{{ dado[2] }}</td>
+                  <td>{{ dado[3] }}</td>          
+                  <td>                                        
+                    <div class="container">
+                        <a href="{{ url_for('admin.admin_unidades.editar', id_unidade=dado[0]) }}"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{ url_for('admin.admin_unidades.excluir', id_unidade=dado[0]) }}"><i class="bi bi-trash3-fill"></i></a>
+                    </div>
+                  </td> 
+                </tr>
 
-        {% endfor %}                
-      </tbody>
-    </table>
+            {% endfor %}                
+          </tbody>
+        </table>
+      </div>  
+    </div>
   </div>
 
   <!-- Modal -->

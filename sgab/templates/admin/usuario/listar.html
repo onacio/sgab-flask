@@ -8,49 +8,51 @@
 
     <h1><p class="text-center">LISTA DE USUÁRIOS</p></h1>
     <br><br>
-
-    <table class="table table-hover">
-        <thead class="table-primary">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">NOME</th>            
-            <th scope="col">USUÁRIO</th>            
-            <th scope="col">SENHA</th>            
-            <th scope="col">E-MAIL</th>            
-            <th scope="col">CARGO</th>            
-            <th scope="col">SETOR</th>            
-            <th scope="col">STATUS</th>            
-            <th scope="col"></th>            
-        </tr>
-        </thead>
-        <tbody>
-        {% for dado in dados: %}          
-            <tr>  
-                <td> {{dado[0] }}</td>
-                <td> {{dado[1] }} {{ dado[2] }}</td>            
-                <td> {{dado[3] }}</td>
-                <td> {{dado[4] }}</td>
-                <td> {{dado[5] }}</td>
-                <td> {{dado[6] }}</td>
-                <td> {{dado[7] }}</td>
-                
-                {% if dado[8] == 1 %}                
-                <td>Ativo</td>                
-                {% else %}
-                <td>Inativo</td>  
-                {% endif %}  
-                                
-                <td>                                        
-                    <div class="container">
-                        <a href="{{ url_for('admin.admin_usuarios.editar', id_usuario=dado[0]) }}"><i class="bi bi-pencil-square"></i></a>
-                        <a href="{{ url_for('admin.admin_usuarios.excluir', id_usuario=dado[0]) }}"><i class="bi bi-trash3-fill"></i></a>
-                    </div>
-                </td>
-            </tr>                     
-        {% endfor %}
-        </tbody>
-    </table> 
-    
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-hover table-sm table-bordered align-middle">
+                <thead class="table-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">NOME</th>            
+                    <th scope="col">USUÁRIO</th>            
+                    <th scope="col">SENHA</th>            
+                    <th scope="col">E-MAIL</th>            
+                    <th scope="col">CARGO</th>            
+                    <th scope="col">SETOR</th>            
+                    <th scope="col">STATUS</th>            
+                    <th scope="col"></th>            
+                </tr>
+                </thead>
+                <tbody>
+                {% for dado in dados: %}          
+                    <tr>  
+                        <td> {{dado[0] }}</td>
+                        <td> {{dado[1] }} {{ dado[2] }}</td>            
+                        <td> {{dado[3] }}</td>
+                        <td> {{dado[4] }}</td>
+                        <td> {{dado[5] }}</td>
+                        <td> {{dado[6] }}</td>
+                        <td> {{dado[7] }}</td>
+                        
+                        {% if dado[8] == 1 %}                
+                        <td>Ativo</td>                
+                        {% else %}
+                        <td>Inativo</td>  
+                        {% endif %}  
+                                        
+                        <td>                                        
+                            <div class="container">
+                                <a href="{{ url_for('admin.admin_usuarios.editar', id_usuario=dado[0]) }}"><i class="bi bi-pencil-square"></i></a>
+                                <a href="{{ url_for('admin.admin_usuarios.excluir', id_usuario=dado[0]) }}"><i class="bi bi-trash3-fill"></i></a>
+                            </div>
+                        </td>
+                    </tr>                     
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>    
 </div>
     
 {% endblock %}
