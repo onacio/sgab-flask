@@ -5,6 +5,13 @@ from sgab.models.unidade import Unidade
 
 admin_unidades = Blueprint('admin_unidades', __name__, url_prefix='/unidades')
 
+@admin_unidades.route('/')
+@login_required('admin')
+def listar():
+    url_atual()
+    unidades = Unidade.listar_todos()        
+    return render_template('admin/unidades.html', unidades=unidades)
+
 @admin_unidades.route('/inserir', methods=['GET', 'POST'])
 @login_required('admin')
 def inserir():
@@ -19,15 +26,6 @@ def inserir():
         return redirect(session['next_url'])   
         
     return redirect(session['next_url'])    
-
-@admin_unidades.route('/listar')
-@login_required('admin')
-def listar():
-    url_atual()
-
-    dados = Unidade.listar_todos()    
-    
-    return render_template('admin/unidades/listar.html', dados=dados)
 
 @admin_unidades.route('/excluir/<int:id_unidade>')
 @login_required('admin')

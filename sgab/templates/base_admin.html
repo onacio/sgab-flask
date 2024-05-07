@@ -13,7 +13,7 @@
         
         <div class="container-fluid navbar navbar-dark bg-dark">
           
-          <a class="navbar-brand" href="#">SGAB</a>
+          <a class="navbar-brand ms-3" href="{{url_for('admin.index')}}">SGAB</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -33,10 +33,9 @@
                   Cadastros
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{{url_for('admin.admin_usuarios.listar')}}">Usuários</a></li>
-                  <li><a class="dropdown-item" href="{{url_for('admin.admin_unidades.listar')}}">Unidades</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <li><a class="dropdown-item" href="{{url_for('admin.admin_usuarios.listar')}}"><i class="bi bi-person-check"></i> Usuários</a></li>
+                  <li><a class="dropdown-item" href="{{url_for('admin.admin_unidades.listar')}}"><i class="bi bi-houses-fill"></i> Unidades</a></li>
+                  <li><a class="dropdown-item" href="#"><i class="bi bi-houses-fill"></i> Material de escritório</a></li>                  
                 </ul>
               </li>   
 
@@ -44,11 +43,14 @@
             <form class="d-flex" role="search">
               <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->              
               {% if session.usuario %}
+                
                 <span class="navbar-text">
                   {{session.nome}}                  
-                </span>
-                <a class="btn btn-danger" href="{{url_for('auth.logout')}}">Sair</a>
+                </span>               
+                  
+                <a class="btn btn-danger ms-3 me-2" href="{{url_for('auth.logout')}}"> <i class="bi bi-box-arrow-right"></i> Sair</a>
                 <!-- <button class="btn btn-outline-success" type="submit">Sair</button> -->
+                
               {% else %}
                 <a class="btn btn-outline-success" href="{{url_for('auth.login')}}">Entrar</a>
               {% endif %}

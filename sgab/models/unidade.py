@@ -11,13 +11,16 @@ class Unidade:
 
     @staticmethod
     def listar_todos():
-        con = Conexao().conectar()
-        cur = con.cursor()
-        cur.execute('SELECT * FROM unidades')
-        dados = cur.fetchall()    
-        con.close()
+        try:
+            con = Conexao().conectar()
+            cur = con.cursor()
+            cur.execute('SELECT * FROM unidades')
+            dados = cur.fetchall()    
+            con.close()
 
-        return dados
+            return dados
+        except:
+            print("Erro ao listar todos as unidades")
 
     def inserir(self):
         sql = '''

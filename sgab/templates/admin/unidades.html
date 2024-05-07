@@ -5,47 +5,53 @@
 {% block conteudo %}
   <div class="container">
     
-    <div>
-      <h1><p class="text-center">Formulário de cadastro de unidaes de saúde</p></h1>
-    </div>
-    
-    
-    <div class="container">
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        NOVO
+    <h1><p class="text-center">Unidades de Saúde</p></h1>
+        
+    <div class="container mb-2">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#unidadeModal">
+        <i class="bi bi-houses"></i>
+        Adicionar unidade de saúde
       </button>
-    </div>
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#unidadeModal">
+        <i class="bi bi-filetype-pdf"></i>
+        Gerar relatório
+      </button>
+    </div>    
     
     <div class="container">
       <div class="table-responsive">
         <table class="table table-hover table-sm table-bordered align-middle">
           <thead class="table-dark">
             <tr>
-              <th scope="col">ID</th>
-              <th scope="col">NOME DA UNIDADE</th>
-              <th scope="col">CNES</th>            
-              <th scope="col">INE</th>                                 
-              <th scope="col"></th>
+              <th width="3%">ID</th>
+              <th width="50%">NOME DA UNIDADE</th>
+              <th width="8%">CNES</th>            
+              <th width="8%">INE</th>                                 
+              <th width="12%"></th>
             </tr>
           </thead>
           <tbody>
             
-            {% for dado in dados: %}
-              
-                <tr>            
-                  <td>{{ dado[0] }}</td>
-                  <td>{{ dado[1] }}</td>
-                  <td>{{ dado[2] }}</td>
-                  <td>{{ dado[3] }}</td>          
-                  <td>                                        
-                    <div class="container">
-                        <a href="{{ url_for('admin.admin_unidades.editar', id_unidade=dado[0]) }}"><i class="bi bi-pencil-square"></i></a>
-                        <a href="{{ url_for('admin.admin_unidades.excluir', id_unidade=dado[0]) }}"><i class="bi bi-trash3-fill"></i></a>
-                    </div>
-                  </td> 
-                </tr>
-
-            {% endfor %}                
+            {% if unidades %}
+              {% for unidade in unidades: %}
+                  <tr>            
+                    <td>{{ unidade[0] }}</td>
+                    <td>{{ unidade[1] }}</td>
+                    <td>{{ unidade[2] }}</td>
+                    <td>{{ unidade[3] }}</td>          
+                    <td>                                        
+                      <div class="container">                          
+                          <a class="btn btn-success btn-sm" href="{{ url_for('admin.admin_unidades.editar', id_unidade=unidade[0]) }}"><i class="bi bi-pencil-square"></i> Editar</a>
+                          <a class="btn btn-danger btn-sm" href="{{ url_for('admin.admin_unidades.excluir', id_unidade=unidade[0]) }}"><i class="bi bi-trash3-fill"></i> Excluir</a>
+                      </div>
+                    </td> 
+                  </tr>
+              {% endfor %}  
+            {% else %}
+              <tr>
+                <td class="text-center" colspan="5">Não existe dados para visualizar</td>
+              </tr>
+            {% endif %}
           </tbody>
         </table>
       </div>  
@@ -53,7 +59,7 @@
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="unidadeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     
     <div class="modal-dialog">
       
