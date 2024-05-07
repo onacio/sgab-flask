@@ -4,26 +4,53 @@
 
 {% block conteudo %}
 
-    <h1>Home</h1><br>
-    <br>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="alert alert-danger" role="alert">
-              {% for message in messages %}  
-                {{message}}
-              {% endfor %}
+<div class="container">
+    <!-- <span class="navbar-text">Página principal do sistema</span> -->
+    
+    <div class="row mt-3">
+        <div class="col-sm-6 mb-3 mb-sm-0 ">
+          <div class="card border-dark">
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
-        {% endif %}
-    {% endwith %}
-    <!-- {% if session.usuario %}
-        <h2>Nome: [ {{session.nome}} ]</h2>        
-        <h2>Usuário: {{session.usuario}}</h2>
-        <h2>E-mail: {{session.email}}</h2>
-        <h2>Cargo: {{session.cargo}}</h2>
-        <h2>Status: {{session.status}}</h2>
-    {% else %}
-        <h4>Não esta logado</h4>    
-    {% endif %} -->
+          </div>
+        </div>
+        <div class="col-sm-6 mb-3">
+          <div class="card border-dark">
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="card border-dark">
+              <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="card border-dark">
+              <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+      </div> 
+      
+      
+    </div>
+</div>
+
     
 
 {% endblock %}
