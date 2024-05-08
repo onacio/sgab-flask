@@ -10,4 +10,5 @@ coab.register_blueprint(coab_pedidos)
 @login_required('user')
 def index():
     url_atual()
-    return render_template('coab/index.html')
+    dados = (['Coqueiros', 20], ['Nagé', 30])
+    return render_template('coab/index.html', dados=dados)
