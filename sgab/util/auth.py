@@ -54,10 +54,11 @@ def login_required(role):
     def decorator(f):
         @wraps(f)
         def decorated_function(*args, **kwargs):            
-            if 'usuario' in session and session['cargo'] == role: 
+            if 'usuario' in session and session['cargo'] == role:                 
                 return f(*args, **kwargs)                  
             
-            return redirect(session['next_url'])
+            #return redirect(session['next_url'])
+            return redirect(url_for('auth.logout'))
             
         return decorated_function
     return decorator

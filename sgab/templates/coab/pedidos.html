@@ -9,10 +9,14 @@
       <h1><p class="text-center">Formulário de pedidos</p></h1>
     </div>
     
+    <div class="container mb-2">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pedidosModal">
+        <i class="bi bi-person-add"></i>
+        Novo pedido
+      </button>
+    </div>
+    
     <form class="card" action="{{url_for('coab.coab_pedidos.pedidos')}}" method="post">
-      <div>
-        <button class="btn btn-primary" type="submit">NOVO</button>
-      </div>
     </form>      
 
     <table class="table table-hover">
@@ -33,24 +37,69 @@
     </table>
   </div>
   
-    <!-- <h1><p class="text-center">Quem está acessando o sistema</p></h1>
-    <br><br>
+  <!-- Modal -->
+<div class="modal fade" id="pedidosModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    
+  <div class="modal-dialog modal-lg">
+    
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Fazer pedido</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
 
-    <table class="table table-hover">
-      <thead class="table-primary">
-        <tr>
-          <th scope="col">Usuário</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Cargo</th>            
-        </tr>
-      </thead>
-      <tbody>
-        <tr>            
-          <td>{{session.usuario}}</td>
-          <td>{{session.nome}}</td>
-          <td>{{session.cargo}}</td>
-        </tr>                     
-      </tbody>
-    </table> -->
+        <form action="{{url_for('coab.coab_pedidos.inserir')}}" method="post">
+          
+          <div class="row mb-3 g-2">                
+            <!-- Primeira linha -->
+            <div class="col-12">
+              <label for="categoria" class="form-label">Categoria do pedido</label>
+              <select class="form-select" name="categoria">
+                  <option value="" selected>-</option>
+                  <option value="" selected>Escritório</option>
+                  <option value="" selected>Impressos</option>
+                  <option value="" selected>Penso</option>
+                  <option value="" selected>Medicamento</option>                  
+              </select>
+            </div>
+            <!-- FIM da primeira linha -->
+
+            <!-- Segunda linha -->
+            <div class="col-9">
+              <label for="item" class="form-label">Item</label>
+              <select class="form-select" name="item">
+                  <option value="" selected>-</option>
+                  <option value="" selected>Caneta</option>
+                  <option value="" selected>Solicitação</option>
+                  <option value="" selected>Borracha</option>
+                  <option value="" selected>Lápis</option>                  
+              </select>
+            </div>
+
+            <div class="col-3">
+              <label for="quantidade" class="form-label">Quantidade</label>
+              <input type="number" class="form-control" id="quantidade" name="quantidade">
+            </div>            
+            <!-- FIM da segunda linha -->
+            
+            <!-- Terceira linha -->
+            <div class="col-12">
+              <label for="justificativa" class="form-label">Justificativa</label>
+              <textarea class="form-control" id="justificativa" rows="3" name="justificativa"></textarea>
+            </div>            
+            <!-- FIM da terceira linha -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-floppy"></i> Fazer pedido</button>
+          </div>
+        </form>
+      </div>        
+    </div>
+  </div>
+</div> 
 
 {% endblock %}

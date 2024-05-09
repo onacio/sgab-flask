@@ -1,12 +1,13 @@
 from flask import Flask, render_template, redirect, url_for, request, session
 from sgab.modules.auth.auth import auth
 from sgab.modules.coab.coab import coab
-from sgab.util.auth import url_atual
+from datetime import timedelta
 
 from sgab.modules.admin.admin import admin
 
 app = Flask(__name__, template_folder='sgab/templates', static_folder='sgab/static')
 app.secret_key = "fhfhfhfhfereyew"
+app.permanent_session_lifetime = timedelta(seconds=300)
 
 app.register_blueprint(auth)
 app.register_blueprint(admin)

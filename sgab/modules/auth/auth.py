@@ -21,8 +21,11 @@ def login():
             if dados[8] == 1:
                 session['nome'] = dados[1]
                 session['usuario'] = dados[3]            
-                session['cargo'] = dados[6]         
+                session['cargo'] = dados[6] 
+                session['unidade_saude'] = dados[7]        
                 session['status'] = dados[8]
+
+                session.permanent = True
 
                 if dados[6] == 'admin':
                     return redirect(url_for('admin.index'))
