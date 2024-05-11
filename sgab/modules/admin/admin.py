@@ -1,11 +1,12 @@
 from flask import Blueprint, render_template
-from sgab.modules.admin import unidades, usuarios
+from sgab.modules.admin import unidades, usuarios, pedidos
 from sgab.util.auth import login_required, url_atual
 
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
 admin.register_blueprint(usuarios.admin_usuarios)
 admin.register_blueprint(unidades.admin_unidades)
+admin.register_blueprint(pedidos.admin_pedidos)
 
 @admin.route('/')
 @login_required('admin')
