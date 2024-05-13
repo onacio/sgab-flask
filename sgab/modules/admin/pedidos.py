@@ -9,17 +9,28 @@ admin_pedidos = Blueprint('admin_pedidos', __name__, url_prefix='/pedidos')
 @login_required('admin')
 def listar():
     url_atual()
-    pedidos = Pedido.listar_todos()        
+    pedidos = Pedido.listar_todos()   
+    print(pedidos) 
+    return render_template('admin/pedidos-listar.html', pedidos=pedidos)
 
-    return render_template('admin/pedidos.html', pedidos=pedidos)
+
 
 @admin_pedidos.route('/atender', methods=['POST'])
+@admin_pedidos.route('/atender/<int:id_pedido>')
 @login_required('admin')
-def atender(): 
-    if request.method == "POST":
-        return redirect(session['next_url'])
+def atender_pedido(id_pedido=''):
+    if request.method == 'POST':     
+        id_pedido = request.form['id']
+        quantidade_liberada = request.form['quantidade-liberada']
+
+        Pedido.alterar(id_pedido, quantidade_liberada) 
+        return redirect(session['next_url'])  
     
-    return redirect(session['next_url'])
+    pedido = Pedido.listar_um(id_pedido)   
+    print(pedido)     
+    return render_template('admin/pedido-atender.html', pedido=pedido)    
+
+
 
 @admin_pedidos.route('/inserir', methods=['GET', 'POST'])
 @login_required('admin')

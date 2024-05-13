@@ -1,14 +1,13 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for, jsonify, json
+from flask import Blueprint, render_template, request, session, redirect, url_for, jsonify
 from sgab.util.auth import login_required, url_atual
 from sgab.models.pedido import Pedido
 from sgab.models.itens_pedidos import Itens
-
 
 coab_pedidos = Blueprint('coab_pedidos', __name__, url_prefix='/pedidos')
 
 @coab_pedidos.route('/')
 @login_required('user')
-def pedidos(): 
+def index(): 
     url_atual()  
     pedidos = Pedido.listar_todos() 
     return render_template('coab/pedidos.html', pedidos=pedidos)
@@ -32,7 +31,7 @@ def inserir():
         
         pedido.inserir()
 
-        return redirect(url_for('coab.coab_pedidos.pedidos'))
+        return redirect(url_for('coab.coab_pedidos.index'))
 
     return 'erro'
 

@@ -7,7 +7,7 @@ from sgab.modules.admin.admin import admin
 
 app = Flask(__name__, template_folder='sgab/templates', static_folder='sgab/static')
 app.secret_key = "fhfhfhfhfereyew"
-app.permanent_session_lifetime = timedelta(seconds=300)
+app.permanent_session_lifetime = timedelta(seconds=10000)
 
 app.register_blueprint(auth)
 app.register_blueprint(admin)

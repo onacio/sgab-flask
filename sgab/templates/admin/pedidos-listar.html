@@ -1,0 +1,61 @@
+{% extends 'base_admin.html' %}
+
+{% block titulo %}Admin - Pedidos{% endblock %}
+
+{% block conteudo %}  
+  <div class="container">
+    
+    <div class="mt-2">
+      <h1><p class="text-center">PEDIDOS PENDENTES DE LIBERAÇÃO</p></h1>
+    </div>
+
+    <table class="table table-hover table-sm table-bordered align-middle">
+      <thead class="table-dark text-center">
+      <tr>          
+          <th width="11%" scope="col">Data e Hora</th>            
+          <th width="15%" scope="col">Descrição</th>            
+          <th scope="col">Categoria</th>            
+          <th scope="col">Qtde</th>            
+          <th scope="col">Liberado</th>            
+          <th width="13%" scope="col">Unidade de saúde</th>
+          <th scope="col">Justificativa</th>
+          <th scope="col">Status</th>            
+          <th width="8%" scope="col"></th>            
+      </tr>
+      </thead>
+      <tbody>        
+          {% for pedido in pedidos: %}
+            {% if pedido[9] == 0 %}                   
+              <tr>                
+                  <td> {{ pedido[1] }} </td>            
+                  <td> {{ pedido[2] }} </td>
+                  <td> {{ pedido[3] }} </td>
+                  <td class="text-center"> {{ pedido[4] }} </td>
+                  <td class="text-center"> {{ pedido[5] }} </td>
+                  <td name="justificativa"> {{ pedido[6] }} </td>
+                  <td> {{ pedido[7] }} </td>
+
+                  {% if pedido[9] == 0 %}
+                    <td class="text-secondary"><b>Pendente</b></td>
+                  {% elif pedido[9] == 1 %}
+                  <td class="text-success"><b>Concluído</b></td>
+                  {% else %}
+                    <td></td>
+                  {% endif %}     
+                  
+                  <td>                                        
+                      <div class="container">
+                        <form action="{{ url_for('admin.admin_pedidos.atender_pedido', id_pedido=pedido[0]) }}">
+                          <button class="btn btn-success" type="submit">Atender</button>                        
+                        </form>
+                      </div>
+                  </td>
+              </tr>
+            {% endif %}
+          {% endfor %}                                      
+      </tbody>
+    </table>
+    
+  </div>
+
+{% endblock %}

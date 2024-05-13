@@ -28,6 +28,17 @@ class Pedido:
             return pedidos        
         except:
             print('')
+    
+    @staticmethod
+    def listar_um(id_pedido):
+        try:
+            con = Conexao().conectar()
+            cur = con.cursor()
+            cur.execute("SELECT * FROM pedidos WHERE id = ?", (id_pedido,))
+            pedido = cur.fetchone()
+            return pedido
+        except:
+            print('')
 
     def inserir(self):
         sql = '''
