@@ -5,7 +5,7 @@
 {% block conteudo %}
   <div class="container">
     
-    <h1><p class="text-center">Unidades de Saúde</p></h1>
+    <h1><p class="text-center">UNIDADES DE SAÚDE</p></h1>
         
     <div class="container mb-2">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#unidadeModal">
@@ -24,10 +24,11 @@
           <thead class="table-dark">
             <tr>
               <th width="3%">ID</th>
-              <th width="50%">NOME DA UNIDADE</th>
+              <th width="50%">Nome</th>
+              <th>Apelido</th>
               <th width="8%">CNES</th>            
               <th width="8%">INE</th>                                 
-              <th width="12%"></th>
+              <th width="10%"></th>
             </tr>
           </thead>
           <tbody>
@@ -38,18 +39,19 @@
                     <td>{{ unidade[0] }}</td>
                     <td>{{ unidade[1] }}</td>
                     <td>{{ unidade[2] }}</td>
-                    <td>{{ unidade[3] }}</td>          
+                    <td>{{ unidade[3] }}</td>
+                    <td>{{ unidade[4] }}</td>          
                     <td>                                        
                       <div class="container">                          
-                          <a class="btn btn-success btn-sm" href="{{ url_for('admin.admin_unidades.editar', id_unidade=unidade[0]) }}"><i class="bi bi-pencil-square"></i> Editar</a>
-                          <a class="btn btn-danger btn-sm" href="{{ url_for('admin.admin_unidades.excluir', id_unidade=unidade[0]) }}"><i class="bi bi-trash3-fill"></i> Excluir</a>
+                          <a class="btn btn-success btn-sm" href="{{ url_for('admin.admin_unidades.editar', id_unidade=unidade[0]) }}"><i class="bi bi-pencil-square"></i></a>
+                          <a class="btn btn-danger btn-sm" href="{{ url_for('admin.admin_unidades.excluir', id_unidade=unidade[0]) }}"><i class="bi bi-trash3-fill"></i></a>
                       </div>
                     </td> 
                   </tr>
               {% endfor %}  
             {% else %}
               <tr>
-                <td class="text-center" colspan="5">Não existe dados para visualizar</td>
+                <td class="text-center" colspan="6">Não existem Unidades de Saúde cadastradas</td>
               </tr>
             {% endif %}
           </tbody>
@@ -75,14 +77,17 @@
           <form action="{{url_for('admin.admin_unidades.inserir')}}" method="post">
             
             <div class="mb-3">
-              <label for="recipient-name" class="col-form-label">Nome:</label>
-              <input type="text" name="nome" class="form-control" id="recipient-name">
+              <label for="nome" class="col-form-label">Nome:</label>
+              <input type="text" name="nome" class="form-control" id="name">
 
-              <label for="recipient-name" class="col-form-label">CNES:</label>
-              <input type="number" name="cnes" class="form-control" id="recipient-name">
+              <label for="apelido" class="col-form-label">Apelido:</label>
+              <input type="text" name="apelido" class="form-control" id="apelido">
 
-              <label for="recipient-name" class="col-form-label">INE:</label>
-              <input type="number" name="ine" class="form-control" id="recipient-name">
+              <label for="cnes" class="col-form-label">CNES:</label>
+              <input type="number" name="cnes" class="form-control" id="cnes">
+
+              <label for="ine" class="col-form-label">INE:</label>
+              <input type="number" name="ine" class="form-control" id="ine">
             </div>            
 
             <!-- <div class="mb-3">

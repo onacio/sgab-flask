@@ -17,10 +17,11 @@ def listar():
 def inserir():
     if request.method == 'POST':
         nome = request.form['nome']
+        apelido = request.form['apelido']
         cnes = request.form['cnes']
         ine = request.form['ine']
 
-        unidade = Unidade(nome, cnes, ine)
+        unidade = Unidade(nome, apelido, cnes, ine)
         unidade.inserir()
 
         return redirect(session['next_url'])   

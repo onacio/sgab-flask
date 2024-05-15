@@ -1,11 +1,32 @@
 from sgab.db.conexao import Conexao
 
+
 class Itens():
-    def __init__(self, descricao, categoria):
+    def __init__(self, descricao, categoria, status=0):
         self.descricao = descricao
         self.categoria = categoria
+        self.status = status
 
-        self.criar_tabela()
+    def listar_todos():
+        try:
+            conexao = Conexao().conectar()
+            cursor = conexao.cursor()
+            cursor.execute("SELECT * FROM itens_pedidos")
+            itens = cursor.fetchall()
+            conexao.close()
+            return itens
+        except Exception as erro:
+            raise erro
+
+    def inserir(self):
+        try:
+            con = Conexao().conectar()
+            cur = con.cursor()
+            cur.execute("INSERT INTO itens_pedidos (descricao, categoria, status) VALUES (?,?,?);", (self.descricao, self.categoria, self.status))
+            con.commit()
+            con.close()
+        except Exception as erro:            
+            raise erro
 
     @staticmethod
     def listar_categoria(categoria):
@@ -17,19 +38,5 @@ class Itens():
             con.close()
 
             return categoria
-        except:
-            print('erro ao retornar categoria')
-
-    @staticmethod
-    def criar_tabela(self):
-        sql_tabela = '''
-            CREATE TABLE IF NOT EXISTS itens_pedidos (
-                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                descricao TEXT (100) NOT NULL,
-                categoria TEXT (100) NOT NULL               
-            );
-        '''   
-        con = Conexao().conectar()
-        cur = con.cursor()
-        cur.execute(sql_tabela)
-        con.close()
+        except Exception as erro:            
+            raise erro

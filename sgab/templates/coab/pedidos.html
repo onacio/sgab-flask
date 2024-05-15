@@ -3,69 +3,89 @@
 {% block titulo %}SGAB - Pedidos{% endblock %}
 
 {% block conteudo %}
-  <div class="container">
-    
-    <div>
-      <h1><p class="text-center mt-2">Pedidos Realizados</p></h1>
-    </div>
-    
-    <div class="container mb-2">
+
+<div class="container">
+    <h1 class="mt-1"><p class="text-center">PEDIDOS REALIZADOS</p></h1>
+
+    <div class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              {% for categoria, mensagem in messages %}
+                  <div class="alert alert-{{ categoria }}" role="alert">
+                      {% if categoria == 'success' %}
+                          <i class="bi bi-emoji-sunglasses-fill"></i>
+                          <b>{{ mensagem }}</b>
+                      {% else %}
+                          <i class="bi bi-exclamation-triangle"></i>
+                          <b>{{ mensagem }}</b>
+                      {% endif %}
+                  </div>   
+              {% endfor %}                     
+          {% endif %}
+      {% endwith %}
+  </div>
+
+    <div class="container mb-1">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pedidosModal">
-        <i class="bi bi-person-add"></i>
+        <i class="bi bi-clipboard2-check"></i>
         Novo pedido
       </button>
     </div>
-    
-    <form class="card" action="{{url_for('coab.coab_pedidos.index')}}" method="post">
-    </form>      
 
-    <table class="table table-hover table-sm table-bordered align-middle">
-      <thead class="table-dark text-center">
-      <tr>          
-          <th scope="col">Data e Hora</th>            
-          <th scope="col">Descrição</th>            
-          <th scope="col">Categoria</th>            
-          <th scope="col">Qtde</th>            
-          <th scope="col">Liberado</th>            
-          <!-- <th width="13%" scope="col">UNIDADE DE SAÚDE</th> -->
-          <th scope="col">Justificativa</th>            
-          <th scope="col">Status</th>            
-          <th width="8%" scope="col"></th>            
-      </tr>
-      </thead>
-      <tbody>
-        {% for pedido in pedidos: %}         
-          {% if pedido[6] == session['unidade_saude'] %} 
-            <tr>                
-                <td> {{ pedido[1] }} </td>            
-                <td> {{ pedido[2] }} </td>
-                <td> {{ pedido[3] }} </td>
-                <td class="text-center"> {{ pedido[4] }} </td>
-                <td class="text-center"> {{ pedido[5] }} </td>
-                <!-- <td></td> -->
-                <td> {{ pedido[7] }} </td>
-                
-                {% if pedido[9] == 0 %}
-                  <td class="text-secondary"><b>Pendente</b></td>
-                {% elif pedido[9] == 1 %}
-                <td class="text-success"><b>Concluído</b></td>
-                {% else %}
-                  <td></td>
-                {% endif %}     
-                
-                <td>                                        
-                    <div class="container">
-                        <a class="btn btn-success btn-sm" href=""><i class="bi bi-pencil-square"></i></a>
-                        <a class="btn btn-danger btn-sm" href="{{ url_for('coab.coab_pedidos.excluir', id_pedido=pedido[0]) }}"><i class="bi bi-trash3-fill"></i></a>
-                    </div>
-                </td>
+    <div class="container">
+      <table class="table table-hover table-sm table-bordered align-middle">
+        <thead class="table-dark text-center">
+        <tr>          
+            <th scope="col" width="13%">Data e Hora</th>            
+            <th scope="col">Descrição</th>            
+            <th scope="col">Categoria</th>            
+            <th scope="col">Qtde</th>            
+            <th scope="col">Liberado</th>                      
+            <th scope="col">Justificativa</th>            
+            <th scope="col" width="7%">Status</th>            
+            <th scope="col" width="10%"></th>            
+        </tr>
+        </thead>
+        <tbody>
+          {% if pedidos != False %}
+            {% for pedido in pedidos: %}         
+              {% if pedido[6] == session['unidade_saude'] %} 
+                <tr>                
+                    <td> {{ pedido[1] }} </td>            
+                    <td> {{ pedido[2] }} </td>
+                    <td> {{ pedido[3] }} </td>
+                    <td class="text-center"> {{ pedido[4] }} </td>
+                    <td class="text-center"> {{ pedido[5] }} </td>                  
+                    <td> {{ pedido[7] }} </td>
+                    
+                    {% if pedido[9] == 0 %}
+                      <td class="text-secondary"><b>Pendente</b></td>
+                    {% elif pedido[9] == 1 %}
+                    <td class="text-success"><b>Concluído</b></td>
+                    {% else %}
+                      <td></td>
+                    {% endif %}     
+                    
+                    <td>                                        
+                        <div class="container">
+                            <a class="btn btn-success btn-sm" href="#"><i class="bi bi-pencil-square"></i></a>
+                            <a class="btn btn-danger btn-sm" href="{{ url_for('coab.coab_pedidos.excluir', id_pedido=pedido[0]) }}"><i class="bi bi-trash3-fill"></i></a>
+                        </div>
+                    </td>
+                </tr>
+              {% endif %}                     
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td class="text-center" colspan="8">Não existem pedidos cadastrados</td>
             </tr>
-          {% endif %}                     
-        {% endfor %}
-      </tbody>
-    </table>
-    
-  </div>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+
+        
+</div>
   
   <!-- Modal -->
 <div class="modal fade" id="pedidosModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

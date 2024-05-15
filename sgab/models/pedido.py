@@ -3,13 +3,13 @@ from sgab.db.conexao import Conexao
 
 
 class Pedido:
-    def __init__(self, descricao_item, categoria, unidade_saude, quantidade='', quantidade_liberada='', justificativa='', data_finalizacao='', status=0):
+    def __init__(self, descricao, categoria, solicitante, quantidade, quantidade_liberada=0, justificativa='', data_finalizacao='', status=0):
         self.data_pedido = datetime.now().strftime("%d/%m/%Y-%H:%M")
-        self.descricao_item = descricao_item
+        self.descricao = descricao
         self.categoria = categoria
         self.quantidade = quantidade
         self.quantidade_liberada = quantidade_liberada
-        self.unidade_saude = unidade_saude
+        self.solicitante = solicitante
         self.justificativa = justificativa
         self.data_finalizacao = data_finalizacao
         self.status = status
@@ -23,11 +23,10 @@ class Pedido:
             cur = con.cursor()
             cur.execute('SELECT * FROM pedidos')
             pedidos = cur.fetchall()
-            con.close()
-
+            con.close()            
             return pedidos        
-        except:
-            print('')
+        except Exception as erro:
+            raise erro
     
     @staticmethod
     def listar_um(id_pedido):
@@ -37,42 +36,45 @@ class Pedido:
             cur.execute("SELECT * FROM pedidos WHERE id = ?", (id_pedido,))
             pedido = cur.fetchone()
             return pedido
-        except:
-            print('')
+        except Exception as erro:
+            raise erro
 
     def inserir(self):
-        sql = '''
-            INSERT INTO pedidos (
-                data_pedido, descricao_item, categoria, quantidade, quantidade_liberada, unidade_saude, justificativa, data_finalizacao, status
-            ) VALUES (?,?,?,?,?,?,?,?,?);
-        '''
-        con = Conexao().conectar()
-        cur = con.cursor()
-        cur.execute(sql, (self.data_pedido, self.descricao_item, self.categoria, self.quantidade, self.quantidade_liberada, self.unidade_saude, self.justificativa, self.data_finalizacao, self.status))
-        con.commit()
-        con.close()
+        try:
+            sql = '''
+                INSERT INTO pedidos (
+                    data_pedido, descricao, categoria, quantidade, quantidade_liberada, solicitante, justificativa, data_finalizacao, status
+                ) VALUES (?,?,?,?,?,?,?,?,?);
+            '''
+            conexao = Conexao().conectar()
+            cursor = conexao.cursor()
+            cursor.execute(sql, (self.data_pedido, self.descricao, self.categoria, self.quantidade, self.quantidade_liberada, self.solicitante, self.justificativa, self.data_finalizacao, self.status))
+            conexao.commit()
+            conexao.close()
+        except Exception as erro:
+            raise erro
 
     @staticmethod
     def excluir(id_pedido):        
         try:
-            con = Conexao().conectar()
-            cur = con.cursor()
-            cur.execute("DELETE FROM pedidos WHERE id = ?", (id_pedido,))
-            con.commit()
-            con.close()            
-        except:
-            print('Erro ao excluir pedido')
+            conexao = Conexao().conectar()
+            cursor = conexao.cursor()
+            cursor.execute("DELETE FROM pedidos WHERE id = ?", (id_pedido,))
+            conexao.commit()
+            conexao.close()            
+        except Exception as erro:
+            raise erro
 
     @staticmethod
-    def alterar(id_pedido, qtde):        
+    def alterar(id_pedido, qtde, status, data):        
         try:
             con = Conexao().conectar()
             cur = con.cursor()
-            cur.execute("UPDATE pedidos SET quantidade_liberada = ?, status = ? WHERE id = ?;", (qtde, 1, id_pedido))
+            cur.execute("UPDATE pedidos SET quantidade_liberada = ?, status = ?, data_finalizacao = ? WHERE id = ?;", (qtde, status, data, id_pedido))
             con.commit()
             con.close()            
-        except:
-            print('Erro ao atender o pedido')
+        except Exception as erro:
+            raise erro
     
     def criar_tabela(self):
         sql_tabela_pedidos = '''

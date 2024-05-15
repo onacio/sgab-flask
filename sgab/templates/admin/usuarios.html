@@ -23,14 +23,14 @@
                 <thead class="table-dark">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">NOME</th>            
-                    <th scope="col">USUÁRIO</th>            
-                    <th scope="col">SENHA</th>            
-                    <th scope="col">E-MAIL</th>            
-                    <th scope="col">CARGO</th>            
-                    <th width="13%" scope="col">UNIDADE DE SAÚDE</th>            
-                    <th scope="col">STATUS</th>            
-                    <th width="15%" scope="col"></th>            
+                    <th scope="col">Nome</th>            
+                    <th scope="col">Usuário</th>            
+                    <th scope="col">Senha</th>            
+                    <th scope="col">E-mail</th>            
+                    <th scope="col">Função</th>            
+                    <th width="13%" scope="col">Setor</th>            
+                    <th width="5%" scope="col">Status</th>            
+                    <th width="10%" scope="col"></th>            
                 </tr>
                 </thead>
                 <tbody>
@@ -45,17 +45,17 @@
                         <td> {{usuario[7] }}</td>
                         
                         {% if usuario[8] == 1 %}                
-                          <td>Ativo</td>                
+                          <td class="text-center"><i class="bi bi-check-circle"></i></td>                
                         {% elif usuario[8] == 0 %}
-                          <td>Inativo</td>
+                          <td class="text-center"><i class="bi bi-x-circle-fill"></i></td>
                         {% else %}  
                           <td></td>
                         {% endif %}  
                                         
                         <td>                                        
                             <div class="container">
-                                <a class="btn btn-success btn-sm" href="{{ url_for('admin.admin_usuarios.editar', id_usuario=usuario[0]) }}"><i class="bi bi-pencil-square"></i>Editar</a>
-                                <a class="btn btn-danger btn-sm" href="{{ url_for('admin.admin_usuarios.excluir', id_usuario=usuario[0]) }}"><i class="bi bi-trash3-fill"></i>Excluir</a>
+                                <a class="btn btn-success btn-sm" href="{{ url_for('admin.admin_usuarios.editar', id_usuario=usuario[0]) }}"><i class="bi bi-pencil-square"></i></a>
+                                <a class="btn btn-danger btn-sm" href="{{ url_for('admin.admin_usuarios.excluir', id_usuario=usuario[0]) }}"><i class="bi bi-trash3-fill"></i></a>
                             </div>
                         </td>
                     </tr>                     
@@ -128,7 +128,7 @@
                 <select class="form-select" name="unidade">
                     <option value="" selected>-</option>
                     {% for unidade in unidades: %}
-                      <option value="{{unidade[1]}}">{{unidade[1]}}</option>                                   
+                      <option value="{{unidade[2]}}">{{unidade[2]}}</option>                                   
                     {% endfor %}
                 </select>
               </div>

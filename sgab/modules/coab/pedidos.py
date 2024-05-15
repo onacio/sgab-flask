@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, session, redirect, url_for, jsonify
+from flask import Blueprint, render_template, request, session, redirect, url_for, flash, jsonify
 from sgab.util.auth import login_required, url_atual
 from sgab.models.pedido import Pedido
 from sgab.models.itens_pedidos import Itens
@@ -9,31 +9,37 @@ coab_pedidos = Blueprint('coab_pedidos', __name__, url_prefix='/pedidos')
 @login_required('user')
 def index(): 
     url_atual()  
-    pedidos = Pedido.listar_todos() 
-    return render_template('coab/pedidos.html', pedidos=pedidos)
+    pedidos = Pedido.listar_todos()
+    if pedidos == None:
+        return render_template('coab/pedidos.html', pedidos=False) 
+    else:
+        return render_template('coab/pedidos.html', pedidos=pedidos)
 
-@coab_pedidos.route('/inserir', methods=['POST'])
+@coab_pedidos.route('/inserir', methods=['GET', 'POST'])
 @login_required('user')
 def inserir():
     if request.method == 'POST':
         categoria = request.form['categoria']   
         item = request.form['item']   
         quantidade = request.form['quantidade']   
-        justificativa = request.form['justificativa']   
+        justificativa = request.form['justificativa']  
 
-        pedido = Pedido(
-            descricao_item=item, 
-            categoria=categoria, 
-            quantidade=quantidade, 
-            unidade_saude=session['unidade_saude'],
-            justificativa=justificativa,
-            )
-        
-        pedido.inserir()
+        try:
+            pedido = Pedido(
+                descricao=item, 
+                categoria=categoria, 
+                quantidade=quantidade, 
+                solicitante=session['unidade_saude'],
+                justificativa=justificativa)
+            
+            pedido.inserir()
+            flash('Pedido realizado com sucesso!!!', 'success')
+            return redirect(url_for('coab.coab_pedidos.index'))
+        except Exception as erro:
+            flash('Erro ao fazer pedido', 'danger')
+            raise erro 
 
-        return redirect(url_for('coab.coab_pedidos.index'))
-
-    return 'erro'
+    return redirect(session['next_url'])
 
 @coab_pedidos.route('/excluir/<int:id_pedido>')
 @login_required('user')

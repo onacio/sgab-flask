@@ -2,12 +2,11 @@ from sgab.db.conexao import Conexao
 
 
 class Unidade:
-    def __init__(self, nome, cnes, ine):
+    def __init__(self, nome, apelido, cnes, ine):
         self.nome = nome
+        self.apelido = apelido
         self.cnes = cnes
         self.ine = ine
-
-        #self.criar_tabela()
 
     @staticmethod
     def listar_todos():
@@ -24,11 +23,11 @@ class Unidade:
 
     def inserir(self):
         sql = '''
-            INSERT INTO unidades (nome, cnes, ine) VALUES (?,?,?);
+            INSERT INTO unidades (nome, apelido, cnes, ine) VALUES (?,?,?,?);
         '''
         con = Conexao().conectar()
         cur = con.cursor()
-        cur.execute(sql, (self.nome, self.cnes, self.ine))
+        cur.execute(sql, (self.nome, self.apelido, self.cnes, self.ine))
         con.commit()
         con.close()
 

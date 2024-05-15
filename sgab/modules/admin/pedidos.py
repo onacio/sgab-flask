@@ -1,6 +1,7 @@
 from flask import Blueprint, request, render_template, session, redirect, flash
 from sgab.util.auth import login_required, url_atual
 from sgab.models.pedido import Pedido
+from datetime import datetime
 
 
 admin_pedidos = Blueprint('admin_pedidos', __name__, url_prefix='/pedidos')
@@ -8,12 +9,13 @@ admin_pedidos = Blueprint('admin_pedidos', __name__, url_prefix='/pedidos')
 @admin_pedidos.route('/')
 @login_required('admin')
 def listar():
-    url_atual()
+    url_atual()    
     pedidos = Pedido.listar_todos()   
-    print(pedidos) 
-    return render_template('admin/pedidos-listar.html', pedidos=pedidos)
-
-
+    if pedidos == None:
+        return render_template('admin/pedidos-listar.html', pedidos=False)
+    else:
+        return render_template('admin/pedidos-listar.html', pedidos=pedidos)
+    
 
 @admin_pedidos.route('/atender', methods=['POST'])
 @admin_pedidos.route('/atender/<int:id_pedido>')
@@ -21,13 +23,19 @@ def listar():
 def atender_pedido(id_pedido=''):
     if request.method == 'POST':     
         id_pedido = request.form['id']
-        quantidade_liberada = request.form['quantidade-liberada']
+        quantidade = request.form['quantidade-liberada']
+        status = 1
+        data = datetime.now().strftime("%d/%m/%Y")
 
-        Pedido.alterar(id_pedido, quantidade_liberada) 
-        return redirect(session['next_url'])  
+        try:
+            Pedido.alterar(id_pedido, quantidade, status, data) 
+            flash('Pedido atendido com sucesso!!!', 'success')
+            return redirect(session['next_url'])  
+        except:
+            flash('Erro ao atender o pedido', 'danger')
+            return redirect(session['next_url'])
     
-    pedido = Pedido.listar_um(id_pedido)   
-    print(pedido)     
+    pedido = Pedido.listar_um(id_pedido)          
     return render_template('admin/pedido-atender.html', pedido=pedido)    
 
 
