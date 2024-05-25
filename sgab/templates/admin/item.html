@@ -37,12 +37,12 @@
         <div class="table-responsive">
         <table class="table table-hover table-sm table-bordered align-middle">
             <thead class="table-dark">
-                <tr>
+                <tr class="text-center">
                     <th width="6%">ID</th>
                     <th>Descrição</th>                    
                     <th>Categoria</th>            
-                    <th width="10%">Status</th>                                 
-                    <th width="10%"></th>
+                    <th width="7%">Status</th>                                 
+                    <th width="10%">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,9 +54,11 @@
                         <td> {{ item[2] }} </td>
 
                         {% if item[3] == 0 %}
-                            <td><i class="bi bi-x-circle-fill"></i> Inátivo</td>
+                            <td class="text-center"><i class="bi bi-x-circle-fill"></i></td>
                         {% elif item[3] == 1 %}                            
-                            <td><i class="bi bi-check-circle"></i> Ativo</td>
+                            <td class="text-center"><i class="bi bi-check-circle"></i></td>
+                        {% else %}
+                            <td class="text-center"></td>
                         {% endif %}
 
                         <td>                                        

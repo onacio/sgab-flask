@@ -17,11 +17,11 @@
           <th scope="col">Categoria</th>            
           <th scope="col">Qtde</th>            
           <th scope="col">Liberado</th>            
-          <th width="13%" scope="col">Unidade de saúde</th>
+          <th scope="col" width="13%" >Unidade de saúde</th>
           <th scope="col">Justificativa</th>                                 
           <th scope="col">Finalização</th>            
           <th scope="col">Status</th>            
-          <th width="8%" scope="col"></th>            
+          <th scope="col" width="8%">Ações</th>            
       </tr>
       </thead>
       <tbody>
@@ -39,7 +39,7 @@
                 {% if pedido[9] == 0 %}
                   <td class="text-secondary"><b>Pendente</b></td>
                 {% elif pedido[9] == 1 %}
-                <td class="text-success"><b>Concluído</b></td>
+                  <td class="text-success"><b>Concluído</b></td>
                 {% else %}
                   <td></td>
                 {% endif %}     
