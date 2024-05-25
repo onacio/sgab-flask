@@ -7,7 +7,7 @@ select.addEventListener('change', function(){
 var item = document.querySelector("#item");
 
 async function getDados(categoria){
-    const response = await fetch(`http://127.0.0.1:5000/coab/pedidos/listar/${categoria}`);
+    const response = await fetch(`/coab/pedidos/listar/${categoria}`);
     const dados = await response.json();
 
     console.log(dados); 
@@ -19,7 +19,7 @@ async function getDados(categoria){
     //     option.value = dados[i]; // Defina o valor da opção como a chave do objeto
     //     option.text = dados[i]; // Defina o texto da opção como o valor do objeto
     //     item.appendChild(option);
-    // }
+    // } 
 
     dados.map((dado)=>{
         const option = document.createElement('option');

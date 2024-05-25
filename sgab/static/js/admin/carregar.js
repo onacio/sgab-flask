@@ -2,7 +2,7 @@ function carregar(pedido_id) {
     // Encontrar o pedido correspondente na tabela
     var linhaPedido = document.getElementById('pedido_' + pedido_id);
     
-    // Obter os dados do pedido
+    // Obter os dados do pedido 
     var descricao = linhaPedido.cells[1].innerText;
     var categoria = linhaPedido.cells[2].innerText;
     var quantidade = linhaPedido.cells[3].innerText;
