@@ -23,8 +23,10 @@ async function getDados(categoria){
 
     dados.map((dado)=>{
         const option = document.createElement('option');
-        option.value = dado[1]; // Defina o valor da opção como a chave do objeto
-        option.text = dado[1]; // Defina o texto da opção como o valor do objeto
+        if(dado[3] == 1){
+            option.value = dado[1]; // Defina o valor da opção como a chave do objeto
+            option.text = dado[1]; // Defina o texto da opção como o valor do objeto
+        }
         item.appendChild(option);
     });
 }
