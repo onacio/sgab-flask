@@ -6,15 +6,25 @@ from datetime import datetime
 
 admin_pedidos = Blueprint('admin_pedidos', __name__, url_prefix='/pedidos')
 
-@admin_pedidos.route('/')
+@admin_pedidos.route('/pendentes')
 @login_required('admin')
-def listar():
+def pendentes():
     url_atual()    
     pedidos = Pedido.listar_todos()   
     if pedidos == None:
-        return render_template('admin/pedidos-listar.html', pedidos=False)
+        return render_template('admin/pedidos-pendentes.html', pedidos=False)
     else:
-        return render_template('admin/pedidos-listar.html', pedidos=pedidos)
+        return render_template('admin/pedidos-pendentes.html', pedidos=pedidos)
+
+@admin_pedidos.route('/concluidos')
+@login_required('admin')
+def concluidos():
+    url_atual()    
+    pedidos = Pedido.listar_todos()   
+    if pedidos == None:
+        return render_template('admin/pedidos-concluidos.html', pedidos=False)
+    else:
+        return render_template('admin/pedidos-concluidos.html', pedidos=pedidos)
     
 
 @admin_pedidos.route('/atender', methods=['POST'])

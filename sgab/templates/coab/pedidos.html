@@ -36,42 +36,42 @@
       <table id="tabela" class="table table-striped">
         <thead class="text-center">
           <tr>          
-              <th scope="col" width="13%">Data e Hora</th>            
+              <th scope="col" width="10%">Data</th>            
+              <th scope="col" width="10%">Hora</th>            
               <th scope="col">Descrição</th>            
               <th scope="col">Categoria</th>            
               <th scope="col">Qtde</th>            
               <th scope="col">Liberado</th>                      
               <th scope="col">Justificativa</th>            
               <th scope="col" width="7%">Status</th>            
-              <th scope="col" width="10%">Ações</th>            
+              <th scope="col" width="9%">Ações</th>            
           </tr>
         </thead>
         <tbody>
           {% if pedidos != False %}
             {% for pedido in pedidos: %}         
-              {% if pedido[6] == session['unidade_saude'] %} 
+              {% if pedido[7] == session['unidade_saude'] %} 
                 <tr>                
-                    <td> {{ pedido[1] }} </td>            
-                    <td> {{ pedido[2] }} </td>
-                    <td> {{ pedido[3] }} </td>
-                    <td class="text-center"> {{ pedido[4] }} </td>
-                    <td class="text-center"> {{ pedido[5] }} </td>                  
-                    <td> {{ pedido[7] }} </td>
+                  <td> {{ pedido[1] }} </td>            
+                  <td> {{ pedido[2] }} </td>
+                  <td> {{ pedido[3] }} </td>
+                  <td> {{ pedido[4] }} </td>
+                  <td class="text-center"> {{ pedido[5] }} </td>                  
+                  <td class="text-center"> {{ pedido[6] }} </td>
+                  <td> {{ pedido[8] }} </td>
                     
-                    {% if pedido[9] == 0 %}
-                      <td class="text-secondary"><b>Pendente</b></td>
-                    {% elif pedido[9] == 1 %}
-                    <td class="text-success"><b>Concluído</b></td>
-                    {% else %}
-                      <td></td>
-                    {% endif %}     
-                    
-                    <td>                                        
-                        <div class="container">
-                            <a class="btn btn-success btn-sm" title="Editar" href="#"><i class="bi bi-pencil-square"></i></a>
-                            <a class="btn btn-danger btn-sm" title="Excluir" href="{{ url_for('coab.coab_pedidos.excluir', id_pedido=pedido[0]) }}"><i class="bi bi-trash3-fill"></i></a>
-                        </div>
-                    </td>
+                  {% if pedido[10] == 0 %}
+                    <td class="text-center"><b style="color: rgb(108, 151, 230);">Pendente</b></td>
+                  {% elif pedido[10] == 1 %}
+                    <td class="text-center"><b style="color: rgb(5, 182, 5);">Concluído</b></td>
+                  {% else %}
+                    <td></td>
+                  {% endif %}     
+                  
+                  <td>
+                    <a class="btn btn-success btn-sm" title="Editar" href="#"><i class="bi bi-pencil-square"></i></a>
+                    <a class="btn btn-danger btn-sm" title="Excluir" href="{{ url_for('coab.coab_pedidos.excluir', id_pedido=pedido[0]) }}"><i class="bi bi-trash3-fill"></i></a>                      
+                  </td>
                 </tr>
               {% endif %}                     
             {% endfor %}
@@ -107,7 +107,7 @@
             <!-- Primeira linha -->
             <div class="col-12">
               <label id="categoriaLabel" for="categoria" class="form-label">Categoria</label>
-              <select id="categoria" class="form-select" name="categoria">
+              <select id="categoria" class="form-select" name="categoria" required>
                   <option value="" selected></option>
                   <option value="Escritório">Escritório</option>
                   <option value="Impresso">Impresso</option>
@@ -120,7 +120,7 @@
             <!-- Segunda linha -->
             <div class="col-9">
               <label id="itens" for="item" class="form-label">Item</label>
-              <select id="item" class="form-select" name="item">
+              <select id="item" class="form-select" name="item" required>
                   <option value="" selected></option>
                   <!-- <option value="" selected>Caneta</option>
                   <option value="" selected>Solicitação</option>
@@ -131,7 +131,7 @@
 
             <div class="col-3">
               <label for="quantidade" class="form-label">Quantidade</label>
-              <input type="number" class="form-control" id="quantidade" name="quantidade">
+              <input type="number" class="form-control" id="quantidade" name="quantidade" required>
             </div>            
             <!-- FIM da segunda linha -->
             

@@ -32,10 +32,16 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{{url_for('admin.index')}}">Início</a>
               </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="#">Relatório</a>
-              </li>     
+              
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Pedidos
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{{url_for('admin.admin_pedidos.pendentes')}}"><i class="bi bi-clock-history"></i> Pendentes</a></li>
+                  <li><a class="dropdown-item" href="{{url_for('admin.admin_pedidos.concluidos')}}"><i class="bi bi-check-circle"></i> Concluídos</a></li>                              
+                </ul>
+              </li>
 
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,8 +49,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="{{url_for('admin.admin_usuarios.listar')}}"><i class="bi bi-person-check"></i> Usuários</a></li>
-                  <li><a class="dropdown-item" href="{{url_for('admin.admin_unidades.listar')}}"><i class="bi bi-houses-fill"></i> Unidades</a></li>
-                  <li><a class="dropdown-item" href="{{url_for('admin.admin_pedidos.listar')}}"><i class="bi bi-clipboard2-check"></i> Pedidos</a></li>
+                  <li><a class="dropdown-item" href="{{url_for('admin.admin_unidades.listar')}}"><i class="bi bi-houses-fill"></i> Unidades</a></li>                  
                   <li><a class="dropdown-item" href="{{ url_for('admin.admin_item.index') }}"><i class="bi bi-clipboard-data"></i> Itens</a></li>                  
                 </ul>
               </li>   

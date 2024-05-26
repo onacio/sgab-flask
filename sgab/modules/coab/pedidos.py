@@ -28,8 +28,9 @@ def inserir():
             pedido = Pedido(
                 descricao=item, 
                 categoria=categoria, 
-                quantidade=quantidade, 
                 solicitante=session['unidade_saude'],
+                quantidade=quantidade, 
+                quantidade_liberada='',
                 justificativa=justificativa)
             
             pedido.inserir()
