@@ -28,19 +28,20 @@
     </div>
 
     <div class="m-3">
-      <table class="table table-hover table-sm table-bordered align-middle table-striped">
+      <!-- <table id="tabela-pedidos" class="table table-hover table-sm table-bordered align-middle table-striped"> -->
+      <table id="tabela" class="table table-striped">
         <thead class="table-dark">
-        <tr class="text-center">          
-            <th scope="col" width="11%">Data e Hora</th>            
-            <th scope="col" width="15%">Descrição</th>            
-            <th scope="col">Categoria</th>            
-            <th scope="col">Qtde</th>            
-            <th scope="col">Liberado</th>            
-            <th scope="col" width="13%">Unidade de Saúde</th>
-            <th scope="col">Justificativa</th>
-            <th scope="col" width="7%">Status</th>            
-            <th scope="col" width="8%">Ação</th>            
-        </tr>
+          <tr class="text-center">          
+              <th scope="col" width="11%">Data e Hora</th>            
+              <th scope="col" width="15%">Descrição</th>            
+              <th scope="col">Categoria</th>            
+              <th scope="col">Qtde</th>            
+              <th scope="col">Liberado</th>            
+              <th scope="col" width="13%">Unidade de Saúde</th>
+              <th scope="col">Justificativa</th>
+              <th scope="col" width="7%">Status</th>            
+              <th scope="col" width="8%">Ação</th>            
+          </tr>
         </thead>
         <tbody>
           {% if pedidos != False %}        
@@ -83,5 +84,4 @@
       </table>
     </div>
   <!-- </div>  -->
-
 {% endblock %}

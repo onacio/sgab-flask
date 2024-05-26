@@ -43,7 +43,7 @@ class Pedido:
         try:
             sql = '''
                 INSERT INTO pedidos (
-                    data_pedido, descricao, categoria, quantidade, quantidade_liberada, solicitante, justificativa, data_finalizacao, status
+                    data_pedido, descricao_item, categoria, quantidade, quantidade_liberada, solicitante, justificativa, data_finalizacao, status
                 ) VALUES (?,?,?,?,?,?,?,?,?);
             '''
             conexao = Conexao().conectar()
