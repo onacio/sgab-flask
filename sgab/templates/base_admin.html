@@ -68,20 +68,10 @@
       </nav>
 
       {% block conteudo %}
-        <!-- Aqui ficara o conteudo da página -->
+        <!-- Aqui ficará o conteudo da página -->
       {% endblock %}
-    
 
-    <script>
-      $(document).ready( function () {
-          $('#tabela').DataTable({
-            searching: true,
-            ordering: true,
-            paging: true,
-            //scrollY: 380
-          });
-      } );
-    </script>
+    <script src="{{ url_for('static', filename='js/datatables.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>    
   </body>
 </html>
