@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template
 from sgab.util.auth import url_atual, login_required
 from sgab.modules.coab.pedidos import coab_pedidos
 
@@ -9,6 +9,5 @@ coab.register_blueprint(coab_pedidos)
 @coab.route('/')
 @login_required('user')
 def index():
-    url_atual()
-    dados = (['Coqueiros', 20], ['Nagé', 30])
-    return render_template('coab/index.html', dados=dados)
+    url_atual()    
+    return render_template('coab/index.html')

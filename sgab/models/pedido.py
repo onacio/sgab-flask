@@ -4,8 +4,8 @@ from sgab.db.conexao import Conexao
 
 class Pedido:
     def __init__(self, descricao, categoria, solicitante, quantidade, quantidade_liberada, justificativa='', data_finalizacao='', status=0):
-        self.data_pedido = datetime.now().strftime("%d/%m/%Y")
-        self.hora_pedido = datetime.now().strftime("%H:%M")
+        self.data = datetime.now().strftime("%d/%m/%Y")
+        self.hora = datetime.now().strftime("%H:%M")
         self.descricao = descricao
         self.categoria = categoria
         self.quantidade = quantidade
@@ -20,7 +20,7 @@ class Pedido:
         try:            
             con = Conexao().conectar()
             cur = con.cursor()
-            cur.execute('SELECT * FROM pedidos')
+            cur.execute('SELECT * FROM tb_pedidos')
             pedidos = cur.fetchall()
             con.close()            
             return pedidos        
@@ -32,7 +32,7 @@ class Pedido:
         try:
             con = Conexao().conectar()
             cur = con.cursor()
-            cur.execute("SELECT * FROM pedidos WHERE id = ?", (id_pedido,))
+            cur.execute("SELECT * FROM tb_pedidos WHERE id = ?", (id_pedido,))
             pedido = cur.fetchone()
             return pedido
         except Exception as erro:
@@ -41,14 +41,14 @@ class Pedido:
     def inserir(self):
         try:
             sql = '''
-                INSERT INTO pedidos (
-                    data_pedido, hora_pedido, descricao_item, categoria, quantidade, quantidade_liberada, solicitante, justificativa, data_finalizacao, status
+                INSERT INTO tb_pedidos (
+                    data, hora, descricao, categoria, quantidade, quantidade_liberada, solicitante, justificativa, data_finalizacao, status
                 ) VALUES (?,?,?,?,?,?,?,?,?,?);
             '''
             conexao = Conexao().conectar()
             cursor = conexao.cursor()
-            cursor.execute(sql, (self.data_pedido, 
-                                 self.hora_pedido, 
+            cursor.execute(sql, (self.data, 
+                                 self.hora, 
                                  self.descricao, 
                                  self.categoria, 
                                  self.quantidade, 
@@ -67,7 +67,7 @@ class Pedido:
         try:
             conexao = Conexao().conectar()
             cursor = conexao.cursor()
-            cursor.execute("DELETE FROM pedidos WHERE id = ?", (id_pedido,))
+            cursor.execute("DELETE FROM tb_pedidos WHERE id = ?", (id_pedido,))
             conexao.commit()
             conexao.close()            
         except Exception as erro:
@@ -78,29 +78,8 @@ class Pedido:
         try:
             con = Conexao().conectar()
             cur = con.cursor()
-            cur.execute("UPDATE pedidos SET quantidade_liberada = ?, status = ?, data_finalizacao = ? WHERE id = ?;", (qtde, status, data, id_pedido))
+            cur.execute("UPDATE tb_pedidos SET quantidade_liberada = ?, status = ?, data_finalizacao = ? WHERE id = ?;", (qtde, status, data, id_pedido))
             con.commit()
             con.close()            
         except Exception as erro:
             raise erro
-    
-    def criar_tabela(self):
-        sql_tabela_pedidos = '''
-            CREATE TABLE IF NOT EXISTS pedidos (
-                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                data_pedido TEXT NOT NULL,
-                hora_pedido TEXT NOT NULL,
-                categoria TEXT (100) NOT NULL,
-                descricao_item TEXT (100) NOT NULL,
-                quantidade INTEGER NOT NULL,
-                quantidade_liberada INTEGER NOT NULL,
-                solicitante TEXT (100) NOT NULL,
-                justificativa TEXT NOT NULL,
-                data_finalizacao TEXT (100) NOT NULL,
-                status INTEGER (1) NOT NULL                
-            );
-        '''   
-        con = Conexao().conectar()
-        cur = con.cursor()
-        cur.execute(sql_tabela_pedidos)
-        con.close()

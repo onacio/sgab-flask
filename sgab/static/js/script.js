@@ -30,3 +30,8 @@ async function getDados(categoria){
         item.appendChild(option);
     });
 }
+
+
+function mensagem(msg){
+    alert(msg)
+}

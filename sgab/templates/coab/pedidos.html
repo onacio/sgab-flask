@@ -23,7 +23,7 @@
               {% endfor %}                     
           {% endif %}
       {% endwith %}
-  </div>
+    </div>
 
     <div class="container mb-1">
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pedidosModal">
@@ -36,15 +36,15 @@
       <table id="tabela" class="table table-striped">
         <thead class="text-center">
           <tr>          
-              <th scope="col" width="10%">Data</th>            
-              <th scope="col" width="10%">Hora</th>            
-              <th scope="col">Descrição</th>            
-              <th scope="col">Categoria</th>            
-              <th scope="col">Qtde</th>            
-              <th scope="col">Liberado</th>                      
-              <th scope="col">Justificativa</th>            
-              <th scope="col" width="7%">Status</th>            
-              <th scope="col" width="9%">Ações</th>            
+              <th width="10%">Data</th>                                      
+              <th>Descrição</th>            
+              <th>Categoria</th>            
+              <th>Qtde</th>            
+              <th>Liberado</th>                      
+              <th>Justificativa</th>            
+              <th width="7%">Concluído</th>            
+              <th width="7%">Status</th>            
+              <th width="9%">Ações</th>            
           </tr>
         </thead>
         <tbody>
@@ -52,13 +52,13 @@
             {% for pedido in pedidos: %}         
               {% if pedido[7] == session['unidade_saude'] %} 
                 <tr>                
-                  <td> {{ pedido[1] }} </td>            
-                  <td> {{ pedido[2] }} </td>
+                  <td> {{ pedido[1] }} </td>                  
                   <td> {{ pedido[3] }} </td>
                   <td> {{ pedido[4] }} </td>
                   <td class="text-center"> {{ pedido[5] }} </td>                  
                   <td class="text-center"> {{ pedido[6] }} </td>
                   <td> {{ pedido[8] }} </td>
+                  <td> {{ pedido[9] }} </td>
                     
                   {% if pedido[10] == 0 %}
                     <td class="text-center"><b style="color: rgb(108, 151, 230);">Pendente</b></td>
@@ -69,8 +69,13 @@
                   {% endif %}     
                   
                   <td>
-                    <a class="btn btn-success btn-sm" title="Editar" href="#"><i class="bi bi-pencil-square"></i></a>
-                    <a class="btn btn-danger btn-sm" title="Excluir" href="{{ url_for('coab.coab_pedidos.excluir', id_pedido=pedido[0]) }}"><i class="bi bi-trash3-fill"></i></a>                      
+                    {% if pedido[10] == 0 %}
+                      <a class="btn btn-success btn-sm" title="Editar" href="#"><i class="bi bi-pencil-square"></i></a>
+                      <a class="btn btn-danger btn-sm" title="Excluir" href="{{ url_for('coab.coab_pedidos.excluir', id_pedido=pedido[0]) }}"><i class="bi bi-trash3-fill"></i></a>                      
+                    {% elif pedido[10] == 1 %}
+                      <a class="btn btn-success btn-sm" title="Editar" href="#" onclick="mensagem('Você não pode editar um pedido com status concluído')"><i class="bi bi-pencil-square"></i></a>
+                      <a class="btn btn-danger btn-sm" title="Excluir" href="#" onclick="mensagem('Você não pode excluir um pedido com status concluído')"><i class="bi bi-trash3-fill"></i></a>                                          
+                    {% endif %}
                   </td>
                 </tr>
               {% endif %}                     
@@ -82,9 +87,7 @@
           {% endif %}
         </tbody>
       </table>
-    </div>
-
-        
+    </div>        
 </div>
   
   <!-- Modal -->

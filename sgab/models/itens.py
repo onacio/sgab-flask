@@ -11,7 +11,7 @@ class Itens():
         try:
             conexao = Conexao().conectar()
             cursor = conexao.cursor()
-            cursor.execute("SELECT * FROM itens_pedidos")
+            cursor.execute("SELECT * FROM tb_itens")
             itens = cursor.fetchall()
             conexao.close()
             return itens
@@ -22,7 +22,7 @@ class Itens():
         try:
             con = Conexao().conectar()
             cur = con.cursor()
-            cur.execute("INSERT INTO itens_pedidos (descricao, categoria, status) VALUES (?,?,?);", (self.descricao, self.categoria, self.status))
+            cur.execute("INSERT INTO tb_itens (descricao, categoria, status) VALUES (?,?,?);", (self.descricao, self.categoria, self.status))
             con.commit()
             con.close()
         except Exception as erro:            
@@ -33,7 +33,7 @@ class Itens():
         try:
             con = Conexao().conectar()
             cur = con.cursor()
-            cur.execute("SELECT * FROM itens_pedidos WHERE categoria = ?", (categoria,))
+            cur.execute("SELECT * FROM tb_itens WHERE categoria = ?", (categoria,))
             categoria = cur.fetchall()    
             con.close()
 

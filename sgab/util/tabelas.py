@@ -1,5 +1,5 @@
-USUARIOS = '''
-    CREATE TABLE IF NOT EXISTS usuarios (
+TB_USUARIOS = '''
+    CREATE TABLE IF NOT EXISTS tb_usuarios (
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         nome TEXT (100) NOT NULL,
         sobrenome TEXT (200),
@@ -13,19 +13,20 @@ USUARIOS = '''
 '''
 
 TB_UNIDADES = '''
-    CREATE TABLE IF NOT EXISTS unidades (
+    CREATE TABLE IF NOT EXISTS tb_unidades (
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         nome TEXT (100) NOT NULL UNIQUE,
-        apelido TEXT (100) NOT NULL UNIQUE,
+        nome_curto TEXT (100) NOT NULL UNIQUE,
         cnes INTEGER (7) NOT NULL UNIQUE,
         ine INTEGER (10) NOT NULL UNIQUE
     );
 '''
 
 TB_PEDIDOS = '''
-    CREATE TABLE IF NOT EXISTS pedidos (
+    CREATE TABLE IF NOT EXISTS tb_pedidos (
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        data_pedido TEXT (100) NOT NULL,
+        data TEXT NOT NULL,
+        hora TEXT NOT NULL,
         descricao TEXT (100) NOT NULL,
         categoria TEXT (100) NOT NULL,
         quantidade INTEGER NOT NULL,
@@ -37,11 +38,11 @@ TB_PEDIDOS = '''
     );
 '''
 
-TB_ITENS_PEDIDOS = '''
-    CREATE TABLE IF NOT EXISTS itens_pedidos (
+TB_ITENS = '''
+    CREATE TABLE IF NOT EXISTS tb_itens (
         id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         descricao TEXT (100) NOT NULL,
-        categoria TEXT (100) NOT NULL               
+        categoria TEXT (100) NOT NULL,               
         status INTEGER (1) NOT NULL               
     );
 '''

@@ -2,9 +2,9 @@ from sgab.db.conexao import Conexao
 
 
 class Unidade:
-    def __init__(self, nome, apelido, cnes, ine):
+    def __init__(self, nome, nome_curto, cnes, ine):
         self.nome = nome
-        self.apelido = apelido
+        self.nome_curto = nome_curto
         self.cnes = cnes
         self.ine = ine
 
@@ -13,7 +13,7 @@ class Unidade:
         try:
             con = Conexao().conectar()
             cur = con.cursor()
-            cur.execute('SELECT * FROM unidades')
+            cur.execute('SELECT * FROM tb_unidades')
             dados = cur.fetchall()    
             con.close()
 
@@ -23,11 +23,11 @@ class Unidade:
 
     def inserir(self):
         sql = '''
-            INSERT INTO unidades (nome, apelido, cnes, ine) VALUES (?,?,?,?);
+            INSERT INTO tb_unidades (nome, nome_curto, cnes, ine) VALUES (?,?,?,?);
         '''
         con = Conexao().conectar()
         cur = con.cursor()
-        cur.execute(sql, (self.nome, self.apelido, self.cnes, self.ine))
+        cur.execute(sql, (self.nome, self.nome_curto, self.cnes, self.ine))
         con.commit()
         con.close()
 
@@ -36,22 +36,8 @@ class Unidade:
         try:
             con = Conexao().conectar()
             cur = con.cursor()
-            cur.execute("DELETE FROM unidades WHERE id = ?", (id_unidade,))
+            cur.execute("DELETE FROM tb_unidades WHERE id = ?", (id_unidade,))
             con.commit()
             con.close()
         except:
             print('erro ao excluir dado')
-        
-    def criar_tabela(self):
-        sql_tabela_unidades = '''
-            CREATE TABLE IF NOT EXISTS unidades (
-                id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                nome TEXT (100) NOT NULL UNIQUE,
-                cnes INTEGER (7) NOT NULL UNIQUE,
-                ine INTEGER (15) NOT NULL UNIQUE
-            );
-        '''   
-        con = Conexao().conectar()
-        cur = con.cursor()
-        cur.execute(sql_tabela_unidades)
-        con.close()

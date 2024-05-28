@@ -25,7 +25,7 @@
             <tr class="text-center">
               <th width="3%">ID</th>
               <th width="50%">Nome</th>              
-              <th>Apelido</th>
+              <th>Nome curto</th>
               <th width="8%">CNES</th>            
               <th width="8%">INE</th>                                 
               <th width="11%">Ações</th>
@@ -51,7 +51,13 @@
               {% endfor %}  
             {% else %}
               <tr>
-                <td class="text-center" colspan="6">Não existem Unidades de Saúde cadastradas</td>
+                <!-- <td class="text-center" colspan="6">Não existem Unidades de Saúde cadastradas</td> -->
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+                <td class="text-center"></td>
               </tr>
             {% endif %}
           </tbody>

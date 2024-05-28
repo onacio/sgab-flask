@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, session, redirect, url_for, flash, jsonify
 from sgab.util.auth import login_required, url_atual
 from sgab.models.pedido import Pedido
-from sgab.models.itens_pedidos import Itens
+from sgab.models.itens import Itens
 
 coab_pedidos = Blueprint('coab_pedidos', __name__, url_prefix='/pedidos')
 
