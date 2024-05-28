@@ -14,7 +14,7 @@ def login():
 
         con = Conexao().conectar()
         cur = con.cursor()
-        cur.execute('SELECT * FROM usuarios WHERE usuario = ? AND senha = ?', (usuario, senha))
+        cur.execute('SELECT * FROM usuarios WHERE usuario = ? AND senha = ?', (usuario.strip(), senha.strip()))
         dados = cur.fetchone()
 
         if dados:            

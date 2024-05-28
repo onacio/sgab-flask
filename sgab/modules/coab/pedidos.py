@@ -29,7 +29,7 @@ def inserir():
                 descricao=item, 
                 categoria=categoria, 
                 solicitante=session['unidade_saude'],
-                quantidade=quantidade, 
+                quantidade=quantidade.lstrip(), 
                 quantidade_liberada='',
                 justificativa=justificativa)
             
