@@ -50,5 +50,4 @@ def relatorio():
     unidades = Unidade.listar_todos()   
     autor = session['nome']
     Relatorio(unidades, autor)       
-    # return send_from_directory('', 'relatorio.pdf')
-    return 'teste relatorio'
+    return send_from_directory('', 'relatorio.pdf')
