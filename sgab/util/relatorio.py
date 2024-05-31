@@ -10,7 +10,7 @@ class Relatorio:
         self.titulo()
         self.conteudo()
         self.footer()
-        self.pdf.output('relatorio.pdf')        
+        self.pdf.output('sgab/static/files/relatorio.pdf')        
 
     def cabecalho(self):        
         self.pdf.add_page()
