@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, request, session
 from sgab.util.auth import login_required, url_atual
 from sgab.models.unidade import Unidade
-from sgab.models.relatorio import Relatorio
+from sgab.util.relatorio import Relatorio
 
 
 admin_unidades = Blueprint('admin_unidades', __name__, url_prefix='/unidades')
@@ -47,6 +47,6 @@ def editar(id_unidade):
 @admin_unidades.route('/relatorio')
 @login_required('admin')
 def relatorio():
-    rel = Relatorio()
-    rel.rel()
+    unidades = Unidade.listar_todos()    
+    Relatorio(unidades)       
     return redirect(session['next_url'])
