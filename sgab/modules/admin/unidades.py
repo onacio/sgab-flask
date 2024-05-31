@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, request, session
+from flask import Blueprint, render_template, redirect, request, session, send_from_directory
 from sgab.util.auth import login_required, url_atual
 from sgab.models.unidade import Unidade
 from sgab.util.relatorio import Relatorio
@@ -50,4 +50,4 @@ def relatorio():
     unidades = Unidade.listar_todos()   
     autor = session['nome']
     Relatorio(unidades, autor)       
-    return redirect(session['next_url'])
+    return send_from_directory('', 'relatorio.pdf')

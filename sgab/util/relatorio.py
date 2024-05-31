@@ -1,5 +1,5 @@
 from fpdf import FPDF
-import os
+
 
 class Relatorio:
     def __init__(self, dados, autor): 
@@ -10,8 +10,7 @@ class Relatorio:
         self.titulo()
         self.conteudo()
         self.footer()
-        self.pdf.output('relatorio.pdf')
-        os.startfile('relatorio.pdf')
+        self.pdf.output('relatorio.pdf')        
 
     def cabecalho(self):        
         self.pdf.add_page()
@@ -32,12 +31,9 @@ class Relatorio:
         self.pdf.line(x1=10, x2=200, y1=63, y2=63)    
 
     def conteudo(self):        
-        
         self.pdf.set_x(10)
-        self.pdf.set_y(65)
-        
-        for linha in self.dados:
-            
+        self.pdf.set_y(65)        
+        for linha in self.dados:            
             self.pdf.set_font('Arial', '', 12)                   
             self.pdf.cell(w=135, h=8, txt=linha[1])
             self.pdf.cell(w=29, h=8, txt=str(linha[3]))            
