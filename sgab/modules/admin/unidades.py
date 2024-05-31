@@ -47,6 +47,7 @@ def editar(id_unidade):
 @admin_unidades.route('/relatorio')
 @login_required('admin')
 def relatorio():
-    unidades = Unidade.listar_todos()    
-    Relatorio(unidades)       
+    unidades = Unidade.listar_todos()   
+    autor = session['nome']
+    Relatorio(unidades, autor)       
     return redirect(session['next_url'])
