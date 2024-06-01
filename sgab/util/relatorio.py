@@ -11,12 +11,12 @@ class Relatorio:
         self.titulo()
         self.conteudo()
         self.footer()        
-        self.pdf.output('sgab/static/files/relatorio.pdf')        
+        self.pdf.output(f'{os.getcwd()}/sgab/static/files/relatorio.pdf')        
 
     def cabecalho(self):        
         self.pdf.add_page()
         self.pdf.set_font('Arial', '', 12)
-        self.pdf.image(x=12, y=7, name='sgab/static/img/logo_maragogipe.png', w=20, h=20)
+        self.pdf.image(x=12, y=7, name=f'{os.getcwd()}/sgab/static/img/logo_maragogipe.png', w=20, h=20)
         self.pdf.text(x=35, y=13, txt='PREFEITURA MUNICPAL DE MARAGOGIPE')
         self.pdf.text(x=35, y=18, txt='SECRETARIA MUNICPAL DE SAÚDE')
         self.pdf.text(x=35, y=23, txt='COORDENAÇÃO DE ATENÇÃO BÁSICA')
