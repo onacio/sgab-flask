@@ -1,4 +1,5 @@
 from fpdf import FPDF
+import os
 
 
 class Relatorio:
@@ -9,7 +10,7 @@ class Relatorio:
         self.cabecalho()
         self.titulo()
         self.conteudo()
-        self.footer()
+        self.footer()        
         self.pdf.output('sgab/static/files/relatorio.pdf')        
 
     def cabecalho(self):        
