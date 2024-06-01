@@ -35,3 +35,9 @@ async function getDados(categoria){
 function mensagem(msg){
     alert(msg)
 }
+
+function abrirPDF(url) {
+    const pdfUrl = url;
+    window.open(pdfUrl, '_blank');
+}
+    

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, request, session, send_from_directory
 from sgab.util.auth import login_required, url_atual
 from sgab.models.unidade import Unidade
-from sgab.util.relatorio import Relatorio
+from sgab.util.relatorios import RelatorioUnidades
 
 
 admin_unidades = Blueprint('admin_unidades', __name__, url_prefix='/unidades')
@@ -49,5 +49,5 @@ def editar(id_unidade):
 def relatorio():
     unidades = Unidade.listar_todos()   
     autor = session['nome']
-    Relatorio(unidades, autor)       
-    return send_from_directory('sgab/static/files', 'relatorio.pdf')
+    RelatorioUnidades(unidades, autor)       
+    return send_from_directory('sgab/static/files', 'relatorio_unidades.pdf')

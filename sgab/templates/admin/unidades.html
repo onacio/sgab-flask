@@ -12,14 +12,14 @@
         <i class="bi bi-houses"></i>
         Adicionar unidade de saúde
       </button>
-      <a class="btn btn-success" href="{{url_for('admin.admin_unidades.relatorio')}}">
+      <!-- <a class="btn btn-success" href="{{url_for('admin.admin_unidades.relatorio')}}">
         <i class="bi bi-filetype-pdf"></i>
         Relatório
-      </a>
-      <!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#unidadeModal">
+      </a> -->
+      <button type="button" class="btn btn-success" onclick="abrirPDF('/admin/unidades/relatorio')">
         <i class="bi bi-filetype-pdf"></i>
         Gerar relatório
-      </button> -->
+      </button>
     </div>    
     
     <div class="container">

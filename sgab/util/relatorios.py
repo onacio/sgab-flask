@@ -2,7 +2,7 @@ from fpdf import FPDF
 import os
 
 
-class Relatorio:
+class RelatorioUnidades:
     def __init__(self, dados, autor): 
         self.dados = dados
         self.autor = autor
@@ -11,7 +11,7 @@ class Relatorio:
         self.titulo()
         self.conteudo()
         self.footer()        
-        self.pdf.output(f'{os.getcwd()}/sgab/static/files/relatorio.pdf')        
+        self.pdf.output(f'{os.getcwd()}/sgab/static/files/relatorio_unidades.pdf')        
 
     def cabecalho(self):        
         self.pdf.add_page()
@@ -23,22 +23,26 @@ class Relatorio:
 
     def titulo(self):                
         self.pdf.set_font('Arial', 'B', 13)                
-        self.pdf.set_y(40)        
+        self.pdf.set_y(35)        
         self.pdf.cell(w=190, h=8, txt='Unidades de Saúde da Família', align='C')
         self.pdf.set_font('Arial', '', 12)        
-        self.pdf.text(x=10, y=60, txt='Nome')                        
-        self.pdf.text(x=146, y=60, txt='CNES')        
-        self.pdf.text(x=175, y=60, txt='INE')    
-        self.pdf.line(x1=10, x2=200, y1=63, y2=63)    
+        self.pdf.text(x=10, y=55, txt='Nº')                        
+        self.pdf.text(x=20, y=55, txt='Nome')                        
+        self.pdf.text(x=146, y=55, txt='CNES')        
+        self.pdf.text(x=175, y=55, txt='INE')    
+        self.pdf.line(x1=10, x2=200, y1=56, y2=56)    
 
-    def conteudo(self):        
+    def conteudo(self):
+        num = 1        
         self.pdf.set_x(10)
-        self.pdf.set_y(65)        
+        self.pdf.set_y(57)        
         for linha in self.dados:            
             self.pdf.set_font('Arial', '', 12)                   
-            self.pdf.cell(w=135, h=8, txt=linha[1])
+            self.pdf.cell(w=10, h=8, txt=str(num))            
+            self.pdf.cell(w=125, h=8, txt=linha[1])
             self.pdf.cell(w=29, h=8, txt=str(linha[3]))            
-            self.pdf.cell(w=30, h=8, txt=str(linha[4]), ln=True)                
+            self.pdf.cell(w=30, h=8, txt=str(linha[4]), ln=True)
+            num = num + 1                
     
     def footer(self):
         # Select Arial italic 8
