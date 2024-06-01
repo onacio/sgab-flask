@@ -12,13 +12,3 @@ class Conexao:
         except sqlite3.Error as e:
             print(f"Erro ao conectar ao banco de dados: {e}")
             return None
-    
-    # def executar_consulta(self, consulta):
-    #     try:
-    #         cursor = self.conexao.cursor()
-    #         cursor.execute(consulta)
-    #         resultado = cursor.fetchall()
-    #         return resultado
-    #     except sqlite3.Error as e:
-    #         print(f"Erro ao executar consulta: {e}")
-    #         return None
